@@ -1,0 +1,33 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+
+    /* for visualisation will delete later */
+    background-color: #333;
+
+    padding: 10px;
+    text-align: center;
+}
+
+.new-project-button {
+    width: 175px;
+    height: 40px;
+    padding: 10px; 
+    color: #FFFFFF; 
+    background-color: #443E3E; 
+    border: 1px solid #52C41A; 
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.project-name {
+    color: #A09B9B;
+  }
+
+
+.icon{
+    color: #A09B9B
+}
