@@ -9,7 +9,29 @@
     background-color: #333;
 
     padding: 10px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.logo{
+    width:40px;
+    margin-right: 15px;
+}
+
+.group-name{
+    color: white;
+    font-weight: bold;
+    font-size: 35px;
+}
+
+.ul{
 }
 
 .new-project-button {
@@ -21,13 +43,31 @@
     border: 1px solid #52C41A; 
     border-radius: 10px;
     cursor: pointer;
+    margin-top: 5px;
+}
+
+.user-weidget{
+    width: 175px;
+    height: 40px;
+    padding: 10px; 
+    color: #FFFFFF; 
+    background-color: #443E3E; 
+    border-radius: 10px;
+    bottom: 0;
+    position: absolute;
+    bottom: 40px;
+    left:47.5px;
+}
+
+.list-item{
+    
 }
 
 .project-name {
     color: #A09B9B;
-  }
-
+}
 
 .icon{
-    color: #A09B9B
+    width:16px;
+    cursor: pointer;
 }
