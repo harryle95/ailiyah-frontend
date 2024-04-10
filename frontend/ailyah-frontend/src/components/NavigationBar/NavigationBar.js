@@ -3,6 +3,7 @@ import './styledNavigationBar.css';
 import trashIcon from '../../assets/icons/delete.png';
 import editIcon from '../../assets/icons/edit.png';
 import logo from '../../assets/icons/logo.png';
+import userAvatar from '../../assets/icons/user.png';
 
 const NavigationBar = () => {
   const [projects, setProjects] = useState([]);
@@ -12,7 +13,6 @@ const NavigationBar = () => {
     const defaultProjectName = "New Project";
     const newProject = {
       name: defaultProjectName,
-      // 可以添加其他属性，如项目ID、图标等
     };
     setProjects([newProject, ...projects]);
   };
@@ -24,15 +24,15 @@ const NavigationBar = () => {
   };
 
   const handleEditProjectName = (index) => {
-    // 获取当前项目的名称
+    // get current project name
     const currentProjectName = projects[index].name;
     
-    // 使用 prompt 弹出一个对话框让用户输入新的项目名称
+    // pop up a window to let user to enter the name
     const newProjectName = prompt("Enter new project name:", currentProjectName);
   
-    // 检查用户是否输入了新的项目名称
+    // check if user enter a name
     if (newProjectName !== null) {
-      // 更新项目名称
+      // update the name of the current project
       const updatedProjects = [...projects];
       updatedProjects[index].name = newProjectName;
       setProjects(updatedProjects);
@@ -57,7 +57,10 @@ const NavigationBar = () => {
           <button className="new-project-button" onClick={handleAddNewProject}>New Project +</button>
         </li>
       </ul>
-      <button className="user-weidget">User</button>
+      <button className="user-widget">
+        <img src={userAvatar} alt="User Avatar" className="avatar" />
+        <span className="text">User</span>
+      </button>
     </nav>
   );
 }

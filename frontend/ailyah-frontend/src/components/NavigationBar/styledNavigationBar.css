@@ -6,7 +6,7 @@
     width: 250px;
 
     /* for visualisation will delete later */
-    background-color: #333;
+    /* background-color: #333; */
 
     padding: 10px;
     display: flex;
@@ -46,18 +46,31 @@
     margin-top: 5px;
 }
 
-.user-weidget{
-    width: 175px;
-    height: 40px;
-    padding: 10px; 
-    color: #FFFFFF; 
-    background-color: #443E3E; 
+.user-widget {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: #FFFFFF;
+    background-color: #443E3E;
     border-radius: 10px;
-    bottom: 0;
-    position: absolute;
-    bottom: 40px;
+    width: 175px;
+    bottom: 30px;
     left:47.5px;
+    position:absolute;
 }
+
+.avatar {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    margin-left:34px;
+}
+
+.user-widget .text {
+    font-size: 16px;
+}
+
+
 
 .list-item{
     
