@@ -16,7 +16,7 @@ export function SideBar() {
                 </div>
 
                 {/* Project Navigation */}
-                <nav className="px-10 w-full gap-y-4 max-h-[640px] flex flex-col overflow-x-hidden overflow-y-auto">
+                <nav className="px-10 w-full gap-y-4 max-h-[640px] flex flex-col-reverse overflow-x-hidden overflow-y-auto">
                     {items && items.map((item) => <SideBarListItem key={item.id} listItem={item} />)}
                 </nav>
             </div>
