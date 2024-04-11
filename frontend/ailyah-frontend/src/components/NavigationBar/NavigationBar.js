@@ -11,6 +11,12 @@ const NavigationBar = () => {
 
   const handleAddNewProject = () => {
     const defaultProjectName = "New Project";
+
+    if (projects.length >= 12) {
+      alert("You have reached the maximum limit of projects (12).");
+      return;
+    }
+    
     const newProject = {
       name: defaultProjectName,
     };
@@ -49,8 +55,11 @@ const NavigationBar = () => {
         {projects.map((project, index) => (
           <li key={index} className="list-item">
             <span className="project-name">{project.name}</span>
-            <img src={trashIcon} className="icon" onClick={() => handleDeleteProject(index)} alt="Delete" />
-            <img src={editIcon} className="icon" onClick={() => handleEditProjectName(index)} alt="Edit"/>
+            <span className="iconset">
+              <img src={trashIcon} className="icon" onClick={() => handleDeleteProject(index)} alt="Delete" />
+              <img src={editIcon} className="icon" onClick={() => handleEditProjectName(index)} alt="Edit"/>
+            </span>
+            
           </li>
         ))}
         <li>
