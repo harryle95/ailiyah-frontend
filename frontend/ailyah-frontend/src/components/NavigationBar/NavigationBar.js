@@ -15,11 +15,6 @@ const NavigationBar = () => {
   const handleAddNewProject = () => {
     const defaultProjectName = "New Project";
 
-    if (projects.length >= 12) {
-      alert("You have reached the maximum limit of projects (12).");
-      return;
-    }
-
     const newProject = {
       name: defaultProjectName,
     };
@@ -27,9 +22,12 @@ const NavigationBar = () => {
   };
 
   const handleDeleteProject = (index) => {
-    const updatedProjects = [...projects];
-    updatedProjects.splice(index, 1);
-    setProjects(updatedProjects);
+    const confirmDelete = window.confirm("Are you sure you want to delete this project?");
+    if (confirmDelete) {
+      const updatedProjects = [...projects];
+      updatedProjects.splice(index, 1);
+      setProjects(updatedProjects);
+    }
   };
 
   const handleEditProjectName = (index) => {
@@ -54,36 +52,40 @@ const NavigationBar = () => {
         <img src={logo} className="logo" alt="Logo" />
         <span className="group-name">AILYAH</span>
       </div>
-      <ul>
-        {projects.map((project, index) => (
-          <li 
-          key={index} 
-          className="list-item" 
-          onMouseEnter={() => setHoveredIndex(index)}
-          onMouseLeave={() => setHoveredIndex(null)}
-          >
-            <span className="project-name">{project.name}</span>
-            <span className="iconset">
-              <img 
-                src={hoveredIndex === index ? trashHoverIcon : trashIcon} 
-                className="icon" 
-                onClick={() => handleDeleteProject(index)} 
-                alt="Delete" 
-              />
-              <img 
-                src={hoveredIndex === index ? editHoverIcon : editIcon} 
-                className="icon" 
-                onClick={() => handleEditProjectName(index)} 
-                alt="Edit"
-              />
-            </span>
-            
+        <ul>
+          <div className="project-list-container">
+            {projects.map((project, index) => (
+              <li 
+              key={index} 
+              className="list-item" 
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              >
+                <span className="project-name">{project.name}</span>
+                <span className="iconset">
+                  <img 
+                    src={hoveredIndex === index ? trashHoverIcon : trashIcon} 
+                    className="icon" 
+                    onClick={() => handleDeleteProject(index)} 
+                    alt="Delete" 
+                  />
+                  <img 
+                    src={hoveredIndex === index ? editHoverIcon : editIcon} 
+                    className="icon" 
+                    onClick={() => handleEditProjectName(index)} 
+                    alt="Edit"
+                  />
+                </span>
+                
+              </li>
+            ))}
+          </div>
+          
+          <li>
+            <button className="new-project-button" onClick={handleAddNewProject}>New Project +</button>
           </li>
-        ))}
-        <li>
-          <button className="new-project-button" onClick={handleAddNewProject}>New Project +</button>
-        </li>
-      </ul>
+        </ul>
+      
       <button className="user-widget">
         <img src={userAvatar} alt="User Avatar" className="avatar" />
         <span className="text">User</span>
