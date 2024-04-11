@@ -45,28 +45,9 @@
     margin-top: 5px;
 }
 
-.user-widget {
-    display: flex;
-    align-items: center;
-    padding: 5px;
-    color: #FFFFFF;
-    background-color: #443E3E;
-    border-radius: 10px;
-    width: 175px;
-    bottom: 30px;
-    left:47.5px;
-    position:absolute;
-}
-
-.avatar {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
-    margin-left:34px;
-}
-
-.user-widget .text {
-    font-size: 16px;
+.new-project-button:hover {
+    background-color: #3C3838; 
+    transition: background-color 0.3s;
 }
 
 .list-item{
@@ -82,18 +63,47 @@
 .list-item:hover{
     background-color: #F0F0F0;
     border-radius: 10px;
+    transition: background-color 0.3s;
+}
+
+.list-item:hover .project-name {
+    color: #595959;
+    transition: color 0.3s;
+}
+
+.project-name {
+    color: #A09B9B;
 }
 
 .iconset{
     margin-left: auto;
 }
 
-
-.project-name {
-    color: #A09B9B;
-}
-
 .icon{
     width:16px;
     cursor: pointer;
+}
+
+.user-widget {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    color: #FFFFFF;
+    background-color: #443E3E;
+    border-radius: 10px;
+    width: 195px;
+    bottom: 30px;
+    left:39px;
+    position:absolute;
+}
+
+.avatar {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    margin-left:45px;
+}
+
+.user-widget .text {
+    font-size: 16px;
 }

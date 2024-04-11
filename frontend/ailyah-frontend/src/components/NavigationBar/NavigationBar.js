@@ -4,10 +4,13 @@ import trashIcon from '../../assets/icons/delete.png';
 import editIcon from '../../assets/icons/edit.png';
 import logo from '../../assets/icons/logo.png';
 import userAvatar from '../../assets/icons/user.png';
+import trashHoverIcon from '../../assets/icons/trash_hover.png';
+import editHoverIcon from '../../assets/icons/edit_hover.png';
 
 const NavigationBar = () => {
   const [projects, setProjects] = useState([]);
   const [newProjectName, setNewProjectName] = useState('');
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const handleAddNewProject = () => {
     const defaultProjectName = "New Project";
@@ -16,7 +19,7 @@ const NavigationBar = () => {
       alert("You have reached the maximum limit of projects (12).");
       return;
     }
-    
+
     const newProject = {
       name: defaultProjectName,
     };
@@ -53,11 +56,26 @@ const NavigationBar = () => {
       </div>
       <ul>
         {projects.map((project, index) => (
-          <li key={index} className="list-item">
+          <li 
+          key={index} 
+          className="list-item" 
+          onMouseEnter={() => setHoveredIndex(index)}
+          onMouseLeave={() => setHoveredIndex(null)}
+          >
             <span className="project-name">{project.name}</span>
             <span className="iconset">
-              <img src={trashIcon} className="icon" onClick={() => handleDeleteProject(index)} alt="Delete" />
-              <img src={editIcon} className="icon" onClick={() => handleEditProjectName(index)} alt="Edit"/>
+              <img 
+                src={hoveredIndex === index ? trashHoverIcon : trashIcon} 
+                className="icon" 
+                onClick={() => handleDeleteProject(index)} 
+                alt="Delete" 
+              />
+              <img 
+                src={hoveredIndex === index ? editHoverIcon : editIcon} 
+                className="icon" 
+                onClick={() => handleEditProjectName(index)} 
+                alt="Edit"
+              />
             </span>
             
           </li>
