@@ -20,14 +20,21 @@ export function PromptPanel({ history }) {
                 {
                     history && history.map((item) => (
                         <div key={item.id}>
-                            {item.input_image ? <div className="max-h-[256] overflow-auto"><img src={item.input_image} className="w-full" /></div> : <></>}
-                            <p className="text-black px-4 w-full bg-transparent py-2" >
+                            {item.input_image ?
+                                <div
+                                    className="max-h-36 max-w-36"
+                                >
+                                    <img src={item.input_image} />
+                                </div>
+                                :
+                                <></>
+                            }
+                            <p className="text-black px-4 bg-transparent py-2" >
                                 {item.prompt}
                             </p>
                         </div>
                     ))
                 }
-
             </div>
 
             {/* Prompt and input image  */}
@@ -37,7 +44,12 @@ export function PromptPanel({ history }) {
                 className="flex flex-col gap-y-4 px-4 overflow-auto max-h-[300px]"
                 id="prompt_input"
             >
-                {image ? <div className="max-h-[256] overflow-auto"><img src={image} className="w-full" /></div> : <></>}
+                {image ?
+                    <div
+                        className="max-h-36 max-w-36"
+                    >
+                        <img src={image} />
+                    </div> : <></>}
                 <textarea name="prompt" className="text-black px-4 w-full bg-transparent py-2 border border-black rounded"></textarea>
                 <input
                     className="hidden"
