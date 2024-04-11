@@ -3,7 +3,8 @@
 import PromptForm from "./PromptForm";
 
 
-export function PromptPanel({ history }) {
+export function PromptPanel({ data }) {
+    const history = data.requests
     return (
         <div
             id="prompt-panel"
@@ -38,7 +39,7 @@ export function PromptPanel({ history }) {
                 
             </div>
             {/* Prompt Form */}
-            <PromptForm initPrompt={""}/>
+            <PromptForm initPrompt={""} projectId={data.id}/>
         </div>
     )
 }
