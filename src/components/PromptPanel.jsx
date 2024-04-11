@@ -8,25 +8,27 @@ export function PromptPanel({ history }) {
     return (
         <div
             id="prompt-panel"
-            className="w-1/2 bg-[#e4e4e4] rounded-md p-4 flex flex-col gap-y-4 overflow-auto max-h-screen"
+            className="w-1/2 bg-[#e4e4e4] rounded-md p-4 overflow-auto max-h-screen flex flex-col justify-between"
         >
-            <div className="font-sans font-medium text-center text-xl leading-8 text-[#5E5E5E]">
-                Prompt
+            {/* Title and history log containers */}
+            <div>
+                <div className="font-sans font-medium text-center text-xl leading-8 text-[#5E5E5E]">
+                    Prompt
+                </div>
+
+                {/* Previous Prompts */}
+                {
+                    history && history.map((item) => (
+                        <div key={item.id}>
+                            {item.input_image ? <div className="max-h-[256] overflow-auto"><img src={item.input_image} className="w-full" /></div> : <></>}
+                            <p className="text-black px-4 w-full bg-transparent py-2" >
+                                {item.prompt}
+                            </p>
+                        </div>
+                    ))
+                }
+
             </div>
-
-
-            {/* Previous Prompts */}
-            {
-                history && history.map((item) => (
-                    <div key={item.id}>
-                        {item.input_image ? <div className="max-h-[256] overflow-auto"><img src={item.input_image} className="w-full" /></div> : <></>}
-                        <p className="text-black px-4 w-full bg-transparent py-2" >
-                            {item.prompt}
-                        </p>
-                    </div>
-                ))
-            }
-
 
             {/* Prompt and input image  */}
             <Form
@@ -57,6 +59,7 @@ export function PromptPanel({ history }) {
                     {/* Remove Image Button */}
                     <div className="w-1/3 h-12 mx-auto min-h-12 flex justify-center items-center rounded-lg border-solid border-2 bg-slate-500 hover:bg-slate-600">
                         <button
+                            type="button"
                             // Remove Preview image and set files to null
                             onClick={() => {
                                 setImage(null);
@@ -71,7 +74,6 @@ export function PromptPanel({ history }) {
                     </div>
                 </div>
             </Form>
-
         </div>
     )
 }
