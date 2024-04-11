@@ -6,7 +6,7 @@ export default function Root() {
     return (
         <div className="flex">
             <SideBar/>
-            <Outlet></Outlet>
+            <Outlet/>
         </div>
     );
 }

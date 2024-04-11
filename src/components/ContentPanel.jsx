@@ -13,7 +13,7 @@ export default function ContentPanel() {
 
                 <div className="flex h-full my-3 m-4 gap-x-4">
                     <PromptPanel history={history}/>
-                    <Outlet></Outlet>
+                    <Outlet/>
                 </div>
             </div>
         </div>
