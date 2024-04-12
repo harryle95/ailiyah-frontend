@@ -1,4 +1,4 @@
-import { Form, useNavigate, useSubmit } from "react-router-dom";
+import { Form, useSubmit } from "react-router-dom";
 import { useState } from "react";
 
 // eslint-disable-next-line react/prop-types
@@ -6,7 +6,6 @@ export default function PromptForm({ initImage, initPrompt, projectId }) {
     const [thumbnail, setThumbnail] = useState(initImage);
     const [formData, setFormData] = useState({project_id: projectId, prompt: initPrompt, file: null});
     const submit = useSubmit()
-    const navigate = useNavigate()
     return (
         <Form
             className="flex flex-col gap-y-4 px-4 overflow-auto max-h-[300px]"
@@ -62,6 +61,7 @@ export default function PromptForm({ initImage, initPrompt, projectId }) {
                 </div>
 
                 {/* Generate Button */}
+                {/* TODO: fix form submission to do navigation use onSubmit instead of an onclick button */}
                 <div className="w-1/3 h-12 mx-auto min-h-12 flex justify-center items-center rounded-lg border-solid border-2 bg-slate-500 hover:bg-slate-600">
                     <button
                         type="submit"
@@ -78,7 +78,6 @@ export default function PromptForm({ initImage, initPrompt, projectId }) {
                                 action:"generate"
                             })
 
-                            navigate(0)
                         }
                         }
                     >

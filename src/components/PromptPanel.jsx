@@ -6,6 +6,8 @@ import PromptForm from "./PromptForm";
 export function PromptPanel({ data }) {
     const history = data.requests
     return (
+        // TODO: fix content overflow
+        // TODO: fix delete button hover
         <div
             id="prompt-panel"
             className="w-1/2 bg-[#e4e4e4] rounded-md p-4 overflow-auto max-h-screen flex flex-col justify-between"
@@ -17,6 +19,7 @@ export function PromptPanel({ data }) {
                 </div>
 
                 {/* Previous Prompts */}
+                {/* Todo: fix ad-hoc image src */}
                 {
                     history && history.map((item) => (
                         <div key={item.id}>
@@ -24,7 +27,7 @@ export function PromptPanel({ data }) {
                                 <div
                                     className="max-h-36 max-w-36"
                                 >
-                                    <img src={item.input_image} />
+                                    <img src={`http://127.0.0.1:8000/request/image/${item.input_image}`} />
                                 </div>
                                 :
                                 <></>
