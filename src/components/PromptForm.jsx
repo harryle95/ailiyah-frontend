@@ -56,6 +56,7 @@ export default function PromptForm({ initImage, initPrompt, projectId }) {
                         onClick={() => {
                             setThumbnail(null);
                             setFormData({ ...formData, file: null })
+                            document.getElementById("file-upload").value = null // clear file-upload files for onChange behavior
                         }}
                     >Remove Image</button>
                 </div>
@@ -67,13 +68,14 @@ export default function PromptForm({ initImage, initPrompt, projectId }) {
                         onClick={() => {
                             let submitFormData = new FormData();
                             for (const key in formData) {
+                                console.log(key, formData[key])
                                 submitFormData.append(key, formData[key])
                             }
 
                             submit(submitFormData, {
-                                method: "POST",
-                                action: "generate",
-                                encType: "multipart/form-data"
+                                encType: "multipart/form-data",
+                                method:"POST",
+                                action:"generate"
                             })
                         }
                         }
