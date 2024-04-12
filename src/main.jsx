@@ -10,7 +10,7 @@ import { actionProject, loaderProject, loaderProjectId } from "./services/projec
 import ErrorPage from "./routes/error";
 import ContentPanel from "./components/ContentPanel";
 import ResultPanel from "./components/ResultPanel";
-import { actionMakeRequest } from "./services/request_helpers";
+import { actionMakeRequest, actionHandleRequest } from "./services/request_helpers";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +31,11 @@ const router = createBrowserRouter([
               {
                 path: "/project/:projectId/generate",
                 action: actionMakeRequest,
+                element: <ResultPanel/>
+              },
+              {
+                path: "/project/:projectId/:requestId",
+                action: actionHandleRequest,
                 element: <ResultPanel/>
               }
             ]

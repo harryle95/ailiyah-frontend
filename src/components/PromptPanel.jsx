@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-
+import {Form} from "react-router-dom"
 import PromptForm from "./PromptForm";
 
 
@@ -29,9 +29,14 @@ export function PromptPanel({ data }) {
                                 :
                                 <></>
                             }
-                            <p className="text-black px-4 bg-transparent py-2" >
-                                {item.prompt}
-                            </p>
+                            <div>
+                                <p className="text-black px-4 bg-transparent py-2" >
+                                    {item.prompt}
+                                </p>
+                                <Form method="delete" action={`${item.id}`}>
+                                    <button type="submit">Delete</button>
+                                </Form>
+                            </div>
                         </div>
                     ))
                 }

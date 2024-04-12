@@ -2,9 +2,9 @@ import { Form, useSubmit } from "react-router-dom";
 import { useState } from "react";
 
 // eslint-disable-next-line react/prop-types
-export default function PromptForm({ initImage}){ //, initPrompt, projectId }) {
+export default function PromptForm({ initImage, initPrompt, projectId }) {
     const [thumbnail, setThumbnail] = useState(initImage);
-    const [formData, setFormData] = useState({file:null}) // project_id: projectId, prompt: initPrompt, file: null});
+    const [formData, setFormData] = useState({project_id: projectId, prompt: initPrompt, file: null});
     const submit = useSubmit()
 
     return (
@@ -25,7 +25,7 @@ export default function PromptForm({ initImage}){ //, initPrompt, projectId }) {
                 name="prompt"
                 className="text-black px-4 w-full bg-transparent py-2 border border-black rounded"
                 value={formData.prompt}
-                // onChange={e => setFormData({ ...formData, prompt: e.target.value })}
+                onChange={e => setFormData({ ...formData, prompt: e.target.value })}
             />
             <input
                 className="hidden"
@@ -70,7 +70,6 @@ export default function PromptForm({ initImage}){ //, initPrompt, projectId }) {
                                 submitFormData.append(key, formData[key])
                             }
 
-                            console.log(typeof submitFormData.get("file"))
                             submit(submitFormData, {
                                 method: "POST",
                                 action: "generate",
