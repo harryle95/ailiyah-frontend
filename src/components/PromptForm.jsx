@@ -1,4 +1,4 @@
-import { Form, useSubmit } from "react-router-dom";
+import { Form, useNavigate, useSubmit } from "react-router-dom";
 import { useState } from "react";
 
 // eslint-disable-next-line react/prop-types
@@ -6,7 +6,7 @@ export default function PromptForm({ initImage, initPrompt, projectId }) {
     const [thumbnail, setThumbnail] = useState(initImage);
     const [formData, setFormData] = useState({project_id: projectId, prompt: initPrompt, file: null});
     const submit = useSubmit()
-
+    const navigate = useNavigate()
     return (
         <Form
             className="flex flex-col gap-y-4 px-4 overflow-auto max-h-[300px]"
@@ -77,6 +77,8 @@ export default function PromptForm({ initImage, initPrompt, projectId }) {
                                 method:"POST",
                                 action:"generate"
                             })
+
+                            navigate(0)
                         }
                         }
                     >
