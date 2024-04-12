@@ -44,7 +44,7 @@ export function PromptPanel({ data }) {
                 
             </div>
             {/* Prompt Form */}
-            <PromptForm initPrompt={""} projectId={data.id}/>
+            <PromptForm initPrompt={""} projectId={data.id} key={data.id}/>
         </div>
     )
 }
