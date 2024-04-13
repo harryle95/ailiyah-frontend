@@ -1,12 +1,11 @@
 /* eslint-disable react/prop-types */
 import { Form } from "react-router-dom"
 import PromptForm from "./PromptForm";
-
+import { IMAGE_URL } from "../services/image";
 
 export function PromptPanel({ data }) {
     const history = data.requests
     return (
-        // TODO: fix content overflow
         // TODO: fix delete button hover
         <div
             id="prompt-panel"
@@ -19,7 +18,6 @@ export function PromptPanel({ data }) {
 
             {/* Previous Prompts */}
             <div className="flex flex-col overflow-auto gap-y-4">
-                {/* Todo: fix ad-hoc image src */}
                 {
                     history && history.map((item) => (
                         <div key={item.id}>
@@ -27,7 +25,7 @@ export function PromptPanel({ data }) {
                                 <div
                                     className="max-h-36 max-w-36"
                                 >
-                                    <img src={`http://127.0.0.1:8000/request/image/${item.input_image}`} />
+                                    <img src={`${IMAGE_URL}/${item.input_image}`} />
                                 </div>
                                 :
                                 <></>
