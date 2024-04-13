@@ -7,7 +7,7 @@ export function SideBar() {
     const items = useLoaderData();
     return (
         <div id="sidebar"
-            className="bg-black text-white w-[300px] h-dvh px-4 py-4 flex flex-col justify-between gap-y-4 overflow-auto">
+            className="bg-black text-white min-w-[300px] h-dvh px-4 py-4 flex flex-col justify-between gap-y-4 overflow-auto">
             <div id="sidebar-inner" className="flex flex-col gap-y-4" >
                 {/* Icon bar */}
                 <div className="flex items-center gap-2">
@@ -24,13 +24,12 @@ export function SideBar() {
             <div id="buttons" className="gap-y-4 flex flex-col">
                 {/* New Project Button */}
                 <div id="new-project-button"
-                    className="w-5/6 h-12 mx-auto min-h-12 flex justify-center items-center rounded-lg border-solid border-2 bg-slate-900 hover:bg-slate-600"
+                    className="w-5/6 h-12 mx-auto min-h-12 flex justify-center items-center rounded-lg border-solid border-2 bg-black hover:bg-slate-700"
                 >
                     <Form method="POST">
                         <button type="submit">
                             <div className="flex flex-row gap-2">
                                 <div>New Project</div>
-                                {/* <img className="w-6" src={plus} alt="add" /> */}
                             </div>
                         </button>
                     </Form>
@@ -38,10 +37,9 @@ export function SideBar() {
 
                 {/* User Button */}
                 <div id="user-button"
-                    className="w-5/6 h-12 mx-auto min-h-12 flex justify-center items-center rounded-lg border-solid border-2 bg-slate-900 hover:bg-slate-600"
+                    className="w-5/6 h-12 mx-auto min-h-12 flex justify-center items-center rounded-lg border-solid border-2 bg-black hover:bg-slate-700"
                 >
                     <a href="#" className="flex flex-row gap-2">
-                        {/* <img className="w-6" src={usr} alt="usr" /> */}
                         <div>My Profile</div>
                     </a>
                 </div>
