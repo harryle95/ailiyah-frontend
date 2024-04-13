@@ -12,7 +12,7 @@ export function PromptPanel({ data }) {
             className="w-1/2 bg-[#e4e4e4] rounded-md p-4 h-full flex flex-col justify-between gap-y-4"
         >
             {/* Prompt title */}
-            <div className="font-sans font-medium text-center text-xl leading-8 text-[#5E5E5E]">
+            <div className="font-sans font-medium text-center text-lg leading-8 text-[#5E5E5E]">
                 Prompt
             </div>
 

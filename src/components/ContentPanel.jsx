@@ -8,7 +8,7 @@ export default function ContentPanel() {
         <div className="w-full bg-[#323536] text-white max-h-screen overflow-hidden">
             <div className="p-4 h-full">
                 <div className="flex flex-col h-full">
-                    <div className="text-2xl font-medium m-3 mt-0">
+                    <div className="text-lg font-medium m-3 mt-0">
                         {data.name}
                     </div>
 

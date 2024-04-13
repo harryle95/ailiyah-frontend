@@ -20,8 +20,9 @@ function UpdateForm({ itemId, isEditing, setEditing, projectName, setProjectName
       <input
         name="name"
         type="text"
-        className='w-full overflow-auto px-2 py-1 text-black rounded-md'
+        className='overflow-auto h-full border-none outline-none bg-transparent'
         placeholder={projectName}
+        value={projectName}
         onChange={e => setProjectName(e.target.value)}
         onBlur={() => {
           document.getElementById(`edit-${itemId}`).click()
@@ -77,13 +78,15 @@ export function SideBarListItem({ listItem }) {
   // Chek if current link is active and set button to appear/disappear
   let location = useLocation();
   let isActive = location.pathname === `/project/${itemId}`
-  let buttonClass = isEditing ? "hidden" : isActive ? "w-1/6 items-center flex" : "w-1/6 items-center hidden group-hover:flex"
-  let containerClass = isActive ? "bg-slate-700 rounded-md" : "hover:bg-slate-700 rounded-md"
+  let buttonClass = isEditing ? "hidden" :
+    isActive ? "items-center flex justify-between" :
+      "items-center hidden group-hover:flex justify-between"
+  let containerClass = isActive ? "bg-slate-700 rounded-md my-1" : "hover:bg-slate-700 rounded-md my-1"
   const imageClass = "min-w-5 max-w-5";
 
   return (
     <div className={containerClass}>
-      <div className="group flex items-center gap-x-2">
+      <div className="group flex items-center gap-x-2 px-2 py-3 h-full">
         {/* Edit project name form or project name */}
         {
           isEditing ?
@@ -98,9 +101,9 @@ export function SideBarListItem({ listItem }) {
             :
             <Link
               to={`/project/${itemId}`}
-              className="w-full overflow-clip px-2 py-1 rounded-md"
+              className="w-full overflow-clip rounded-md"
             >
-              <p className="w-full whitespace-nowrap overflow-clip">{projectName}</p>
+              <p className="w-full whitespace-nowrap overflow-clip text-sm">{projectName}</p>
             </Link>
         }
 
