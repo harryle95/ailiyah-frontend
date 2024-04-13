@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import {Form} from "react-router-dom"
+import { Form } from "react-router-dom"
 import PromptForm from "./PromptForm";
 
 
@@ -10,15 +10,15 @@ export function PromptPanel({ data }) {
         // TODO: fix delete button hover
         <div
             id="prompt-panel"
-            className="w-1/2 bg-[#e4e4e4] rounded-md p-4 overflow-auto max-h-screen flex flex-col justify-between"
+            className="w-1/2 bg-[#e4e4e4] rounded-md p-4 h-full flex flex-col justify-between gap-y-4"
         >
-            {/* Title and history log containers */}
-            <div>
-                <div className="font-sans font-medium text-center text-xl leading-8 text-[#5E5E5E]">
-                    Prompt
-                </div>
+            {/* Prompt title */}
+            <div className="font-sans font-medium text-center text-xl leading-8 text-[#5E5E5E]">
+                Prompt
+            </div>
 
-                {/* Previous Prompts */}
+            {/* Previous Prompts */}
+            <div className="flex flex-col overflow-auto gap-y-4">
                 {/* Todo: fix ad-hoc image src */}
                 {
                     history && history.map((item) => (
@@ -44,10 +44,13 @@ export function PromptPanel({ data }) {
                     ))
                 }
 
-                
+
             </div>
             {/* Prompt Form */}
-            <PromptForm initPrompt={""} projectId={data.id} key={data.id}/>
+            <div>
+                <PromptForm initPrompt={""} projectId={data.id} key={data.id} />
+            </div>
+
         </div>
     )
 }
