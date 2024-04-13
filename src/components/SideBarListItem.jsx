@@ -1,83 +1,140 @@
 /* eslint-disable react/prop-types */
-import { NavLink, Form, useLocation } from "react-router-dom";
+import { Link, Form, useLocation } from "react-router-dom";
 import deleteIcon from "../resources/delete.png";
+import deleteHoveredIcon from "../resources/delete_hover.png";
 import editIcon from "../resources/edit.png";
+import editHoveredIcon from "../resources/edit_hover.png";
 import { useState } from "react";
+
+
+function UpdateForm({ itemId, isEditing, setEditing, projectName, setProjectName, inititalName }) {
+  return (
+    <Form method="PUT"
+      onSubmit={(e) => {
+        setEditing(!isEditing)
+        if (projectName === inititalName) {
+          e.preventDefault()
+        }
+      }}>
+      <input name="id" value={itemId} className="hidden" readOnly />
+      <input
+        name="name"
+        type="text"
+        className='w-full overflow-auto px-2 py-1 text-black rounded-md'
+        placeholder={projectName}
+        onChange={e => setProjectName(e.target.value)}
+        onBlur={() => {
+          document.getElementById(`edit-${itemId}`).click()
+        }
+        }
+        autoFocus
+      />
+      <input type="submit" id={`edit-${itemId}`} className="hidden"></input>
+    </Form>
+  )
+}
+
+function DeleteForm({ itemId }) {
+  return (
+    <Form method="DELETE" id={`delete-${itemId}`}>
+      <input name="id" value={itemId} className="hidden" readOnly />
+    </Form>
+  )
+}
+
+
+function SideBarItemButton({ form, type, name, onClickHandler, imageClass, normalIcon, hoverIcon }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const enterHandler = () => setIsHovered(true);
+  const leaveHandler = () => setIsHovered(false);
+
+  return (
+    <button
+      name={name}
+      form={form}
+      type={type}
+      onClick={onClickHandler}
+      onMouseEnter={enterHandler}
+      onMouseLeave={leaveHandler}
+    >
+      {isHovered ?
+        <img className={imageClass} src={hoverIcon} />
+        :
+        <img className={imageClass} src={normalIcon} />
+      }
+    </button>
+  )
+}
 
 
 export function SideBarListItem({ listItem }) {
   const itemId = listItem.id
-  const itemName = listItem.name
+
+  // States
   const [isEditing, setEditing] = useState(false);
   const [projectName, setProjectName] = useState(listItem.name);
 
+  // Chek if current link is active and set button to appear/disappear
   let location = useLocation();
-
   let isActive = location.pathname === `/project/${itemId}`
-  let buttonClass = isActive?"w-1/6 items-center flex":"w-1/6 items-center hidden group-hover:flex"
+  let buttonClass = isEditing ? "hidden" : isActive ? "w-1/6 items-center flex" : "w-1/6 items-center hidden group-hover:flex"
+  let containerClass = isActive ? "bg-slate-700 rounded-md" : "hover:bg-slate-700 rounded-md"
+  const imageClass = "min-w-5 max-w-5";
 
   return (
-    <div className="group flex items-center gap-x-2">
-      {/* Edit project name form or project name */}
-      {
-        isEditing ?
-          <Form method="PUT" onSubmit={() => setEditing(!isEditing)}>
-            <input name="id" value={itemId} className="hidden" readOnly />
-            <input
-              name="name"
-              type="text"
-              className='w-full overflow-auto px-2 py-1 text-black rounded-md'
-              placeholder={projectName}
-              onChange={e => setProjectName(e.target.value)}
-            />
-            <input type="submit" id={`edit-${itemId}`} className="hidden"></input>
-          </Form> :
-          <NavLink
-            id={`project/${itemId}`}
-            to={`/project/${itemId}`}
-            className={({ isActive }) => isActive ?
-              "w-full overflow-clip px-2 py-1 rounded-md border-[#c432f5] border-solid border-2 active"
-              :
-              "w-full overflow-clip px-2 py-1 rounded-md"
-            }
-          >
-            <p className="w-full whitespace-nowrap overflow-clip">{itemName}</p>
-          </NavLink>
-      }
-
-      {/* Edit and Delete Buttons */}
-      {/* Edit Button - switch editing modes and submit form if in editting mode */}
-      <div
-        className={buttonClass}
-      >
+    <div className={containerClass}>
+      <div className="group flex items-center gap-x-2">
+        {/* Edit project name form or project name */}
         {
           isEditing ?
-            <button
-              name="submit"
-              onClick={() => document.getElementById(`edit-${itemId}`).click()}
+            <UpdateForm
+              itemId={itemId}
+              isEditing={isEditing}
+              setEditing={setEditing}
+              projectName={projectName}
+              setProjectName={setProjectName}
+              inititalName={listItem.name}
+            />
+            :
+            <Link
+              to={`/project/${itemId}`}
+              className="w-full overflow-clip px-2 py-1 rounded-md"
             >
-              <img className="min-w-5 max-w-5" src={editIcon} alt="editIcon" />
-            </button> :
-            <button
-              name="edit"
-              onClick={() => { setEditing(!isEditing); console.log(isEditing) }}
-            >
-              <img className="min-w-5 max-w-5" src={editIcon} alt="editIcon" />
-            </button>
+              <p className="w-full whitespace-nowrap overflow-clip">{projectName}</p>
+            </Link>
         }
 
+        {/* Edit/Submit and Delete Buttons */}
+        {/* Edit/Submit Button - switch editing modes and submit form if in editting mode */}
+        <div
+          className={buttonClass}
+        >
+          <SideBarItemButton
+            name="edit"
+            imageClass={imageClass}
+            normalIcon={editIcon}
+            hoverIcon={editHoveredIcon}
+            onClickHandler={() => {
+              setEditing(!isEditing)
+            }
+            }
+          />
 
-        {/* Delete Button */}
-        <Form method="DELETE" id={`delete-${itemId}`}>
-          <input name="id" value={itemId} className="hidden" readOnly />
-        </Form>
+          {/* Delete Form */}
+          <DeleteForm itemId={itemId} />
 
-        {/* Delete button - put outside form for alignment */}
-        <button form={`delete-${itemId}`} type="submit">
-          <img src={deleteIcon} className="min-w-5 max-w-5" alt="deleteIcon" />
-        </button>
+          {/* Delete button - put outside form for alignment */}
+          <SideBarItemButton
+            form={`delete-${itemId}`}
+            type="submit"
+            name="delete"
+            imageClass={imageClass}
+            normalIcon={deleteIcon}
+            hoverIcon={deleteHoveredIcon}
+          />
+        </div>
+
       </div>
-
     </div>
   )
 }
