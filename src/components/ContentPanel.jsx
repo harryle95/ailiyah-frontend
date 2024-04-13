@@ -12,7 +12,7 @@ export default function ContentPanel() {
                         {data.name}
                     </div>
 
-                    <div className="flex overflow-auto">
+                    <div className="flex overflow-auto h-full">
                         <PromptPanel data={data} />
                         <Outlet />
                     </div>
