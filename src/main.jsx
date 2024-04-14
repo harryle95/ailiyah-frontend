@@ -10,34 +10,36 @@ import { actionProject, loaderProject, loaderProjectId } from "./services/projec
 import ErrorPage from "./routes/error";
 import ContentPanel from "./components/ContentPanel";
 import ResultPanel from "./components/ResultPanel";
-import { actionMakeRequest, actionHandleRequest } from "./services/request_helpers";
+import { actionMakeRequest, actionHandleRequest, loaderRequestID, actionLogRequest } from "./services/request_helpers";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root/>,
+    element: <Root />,
     loader: loaderProject,
-    errorElement: <ErrorPage/>,
+    errorElement: <ErrorPage />,
     action: actionProject,
     children: [
       {
-        errorElement: <ErrorPage/>,
+        errorElement: <ErrorPage />,
         children: [
           {
             path: "/project/:projectId",
-            element: <ContentPanel/>,
+            element: <ContentPanel />,
             loader: loaderProjectId,
-            children: [
-              {
-                path: "/project/:projectId/generate",
-                action: actionMakeRequest,
-                element: <ResultPanel/>
-              },
-              {
-                path: "/project/:projectId/:requestId",
-                action: actionHandleRequest,
-                element: <ResultPanel/>
-              }
+            action: actionLogRequest,
+
+            children: [{
+              path: "/project/:projectId/create",
+              element: <ResultPanel/>,
+              action: actionMakeRequest,
+            },
+            {
+              path: "/project/:projectId/:requestId",
+              action: actionHandleRequest,
+              element: <ResultPanel />,
+              loader: loaderRequestID
+            }
             ]
           }
         ]
