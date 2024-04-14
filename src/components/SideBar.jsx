@@ -7,7 +7,7 @@ export function SideBar() {
     const items = useLoaderData();
     return (
         <div id="sidebar"
-            className="bg-black text-white min-w-[300px] max-w-[300px] h-dvh px-4 py-4 flex flex-col justify-between gap-y-4 overflow-auto">
+            className="bg-black text-white min-w-[230px] max-w-[230px] h-dvh px-4 py-4 flex flex-col justify-between gap-y-4 overflow-auto">
             <div id="sidebar-inner" className="flex flex-col gap-y-4" >
                 {/* Icon bar */}
                 <div className="flex items-center gap-2">
