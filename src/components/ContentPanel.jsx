@@ -5,7 +5,7 @@ export default function ContentPanel() {
     const data = useLoaderData();
 
     return (
-        <div className="w-full bg-[#323536] text-white max-h-screen overflow-hidden">
+        <div className="w-full flex-grow-1 bg-[#323536] text-white h-screen overflow-hidden">
             <div className="p-4 h-full">
                 <div className="flex flex-col h-full">
                     <div className="text-lg font-medium m-3 mt-0">

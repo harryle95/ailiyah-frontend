@@ -3,22 +3,33 @@ import logo from "../resources/logo.png";
 import { SideBarListItem } from "./SideBarListItem";
 
 
+function IconPanel() {
+    return (
+        <div className="flex items-center gap-4">
+            <img className="w-14 h-14" src={logo} alt="logo" />
+            <div className="font-sans font-bold leading-8 text-xl">AILYAH</div>
+        </div>
+    )
+}
+
+function SideBarNav({ items, className }) {
+    return (
+        <nav className={className}>
+            <div className="flex flex-col overflow-x-hidden overflow-y-auto">
+                {items && items.map((item) => <SideBarListItem key={item.id} listItem={item} />)}
+            </div>
+        </nav>
+    )
+}
+
 export function SideBar() {
     const items = useLoaderData();
     return (
         <div id="sidebar"
-            className="bg-black text-white min-w-[230px] max-w-[230px] h-dvh px-4 py-4 flex flex-col justify-between gap-y-4 overflow-auto">
-            <div id="sidebar-inner" className="flex flex-col gap-y-4" >
-                {/* Icon bar */}
-                <div className="flex items-center gap-2">
-                    <img className="w-14 h-14" src={logo} alt="logo" />
-                    <div className="font-sans font-bold leading-8 text-xl">AILYAH</div>
-                </div>
-
-                {/* Project Navigation */}
-                <nav className="w-full max-h-[640px] flex flex-col-reverse overflow-x-hidden overflow-y-auto">
-                    {items && items.map((item) => <SideBarListItem key={item.id} listItem={item} />)}
-                </nav>
+            className="bg-black text-white w-[230px] h-dvh px-4 py-4 flex flex-col justify-between gap-y-4 overflow-auto flex-none">
+            <div id="sidebar-inner" className="flex flex-col gap-y-4 w-full" >
+                <IconPanel />
+                <SideBarNav items={items} className="w-full max-h-[640px]"/>
             </div>
 
             <div id="buttons" className="gap-y-4 flex flex-col">
