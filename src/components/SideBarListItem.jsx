@@ -1,12 +1,11 @@
-/* eslint-disable react/prop-types */
 import { Link, Form, useLocation, useSubmit } from "react-router-dom";
 import deleteIcon from "../resources/delete.png";
 import deleteHoveredIcon from "../resources/delete_hover.png";
 import editIcon from "../resources/edit.png";
 import editHoveredIcon from "../resources/edit_hover.png";
 import { useState } from "react";
-import SButton from "./SButton";
-import SButtonGroup from "./SButtonGroup";
+import SButton from "./SComponents/SButton";
+import SButtonGroup from "./SComponents/SButtonGroup";
 
 
 function UpdateForm({ id, isEditing, setEditing, projectName, setProjectName, inititalName }) {
@@ -102,6 +101,7 @@ export function SideBarListItem({ listItem }) {
       setEditing(!isEditing)
     }
     }
+    title="Edit Project's Name"
   />
 
   const DeleteButton = <SButton
@@ -111,6 +111,7 @@ export function SideBarListItem({ listItem }) {
     imageClass={imageClass}
     normalIcon={deleteIcon}
     hoverIcon={deleteHoveredIcon}
+    title="Delete Project"
   />
 
   // Update and Delete Forms

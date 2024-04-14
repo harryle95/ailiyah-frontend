@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { Form } from "react-router-dom"
 import PromptForm from "./PromptForm";
 import { IMAGE_URL } from "../services/image";
