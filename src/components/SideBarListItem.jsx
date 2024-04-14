@@ -5,9 +5,11 @@ import deleteHoveredIcon from "../resources/delete_hover.png";
 import editIcon from "../resources/edit.png";
 import editHoveredIcon from "../resources/edit_hover.png";
 import { useState } from "react";
+import SButton from "./SButton";
+import SButtonGroup from "./SButtonGroup";
 
 
-function UpdateForm({ itemId, isEditing, setEditing, projectName, setProjectName, inititalName }) {
+function UpdateForm({ id, isEditing, setEditing, projectName, setProjectName, inititalName }) {
   const submit = useSubmit()
   const [projectNameBeforeChange, setProjectNameBeforeChange] = useState(inititalName);
 
@@ -17,71 +19,57 @@ function UpdateForm({ itemId, isEditing, setEditing, projectName, setProjectName
     setEditing(!isEditing)
     if (projectName !== inititalName) {
       setProjectNameBeforeChange(projectName)
-      submit(e.currentTarget.form, { method: "PUT"})
+      submit(e.currentTarget.form, { method: "PUT" })
     }
   }
-  const escHandler = (e) => {
-    if (e.keyCode === 27){
+  const keyDownHandler = (e) => {
+    if (e.keyCode === 27) {
       setProjectName(projectNameBeforeChange)
       setEditing(!isEditing)
+    } else if (e.keyCode === 13) {
+      submitHandler(e)
     }
   }
   const changeHandler = (e) => setProjectName(e.target.value)
   return (
     <Form method="PUT"
-      key={itemId}
+      key={id}
       onSubmit={submitHandler}>
-      <input name="id" value={itemId} className="hidden" readOnly />
+      <input name="id" value={id} className="hidden" readOnly />
       <input
         name="name"
         type="text"
-        className='overflow-auto h-full border-none outline-none bg-transparent'
+        className='overflow-auto h-full w-full border-none outline-none bg-transparent text-sm'
         placeholder={projectName}
         value={projectName}
         onChange={changeHandler}
         onBlur={submitHandler}
-        onKeyDown={escHandler}
+        onKeyDown={keyDownHandler}
         autoFocus
       />
     </Form>
   )
 }
 
-function DeleteForm({ itemId }) {
+function DeleteForm({ id }) {
   return (
-    <Form method="DELETE" id={`delete-${itemId}`}>
-      <input name="id" value={itemId} className="hidden" readOnly />
+    <Form method="DELETE" id={`delete-${id}`}>
+      <input name="id" value={id} className="hidden" readOnly />
     </Form>
   )
 }
 
-
-function SideBarItemButton({ form, type, name, onClickHandler, imageClass, normalIcon, hoverIcon }) {
-  const [isHovered, setIsHovered] = useState(false);
-  const enterHandler = () => setIsHovered(true);
-  const leaveHandler = () => setIsHovered(false);
-
+function GradientMaskedLink({ to, className, textClassName, maskClassName, textValue }) {
   return (
-    <button
-      name={name}
-      form={form}
-      type={type}
-      onClick={onClickHandler}
-      onMouseEnter={enterHandler}
-      onMouseLeave={leaveHandler}
-    >
-      {isHovered ?
-        <img className={imageClass} src={hoverIcon} />
-        :
-        <img className={imageClass} src={normalIcon} />
-      }
-    </button>
+    <Link to={to} className={className}>
+      <p className={textClassName}>{textValue}</p>
+      <div className={maskClassName}></div>
+    </Link>
   )
 }
 
-
 export function SideBarListItem({ listItem }) {
-  const itemId = listItem.id
+  const id = listItem.id
 
   // States
   const [isEditing, setEditing] = useState(false);
@@ -89,12 +77,12 @@ export function SideBarListItem({ listItem }) {
 
   // Chek if current link is active and set button to appear/disappear
   let location = useLocation();
-  let isActive = location.pathname === `/project/${itemId}`
+  let isActive = location.pathname === `/project/${id}`
 
   // If link is active, but not editing -> show buttons. If editting -> hide buttons. If neither -> hover shows button 
   let buttonClass = isEditing ? "hidden" :
-    isActive ? "items-center flex justify-between absolute top-0 bottom-0 right-0" :
-      "items-center hidden group-hover:flex justify-between absolute top-0 bottom-0 right-0"
+    isActive ? "absolute top-0 bottom-0 right-0" :
+      "hidden group-hover:flex absolute top-0 bottom-0 right-0"
 
   // If link is active -> set bg color. If link is not active, set bg color on hover 
   let containerClass = isActive ? "bg-slate-700 rounded-md my-1" : "hover:bg-slate-700 rounded-md my-1"
@@ -104,62 +92,62 @@ export function SideBarListItem({ listItem }) {
     "absolute top-0 bottom-0 right-0 bg-gradient-to-l to-transparent w-8 group-hover:w-20 group-hover:from-60% from-0% from-black group-hover:from-slate-700"
   const imageClass = "min-w-5 max-w-5";
 
+  // Edit and delete buttons 
+  const EditButton = <SButton
+    name="edit"
+    imageClass={imageClass}
+    normalIcon={editIcon}
+    hoverIcon={editHoveredIcon}
+    onClick={() => {
+      setEditing(!isEditing)
+    }
+    }
+  />
+
+  const DeleteButton = <SButton
+    form={`delete-${id}`}
+    type="submit"
+    name="delete"
+    imageClass={imageClass}
+    normalIcon={deleteIcon}
+    hoverIcon={deleteHoveredIcon}
+  />
+
+  // Update and Delete Forms
+
+  const UpdateFormInstance = <UpdateForm
+    id={id}
+    isEditing={isEditing}
+    setEditing={setEditing}
+    projectName={projectName}
+    setProjectName={setProjectName}
+    inititalName={listItem.name}
+  />
+
+  const DeleteFormInstance = <DeleteForm id={id} />
+
+  // Link 
+  const LinkInstance = <GradientMaskedLink
+    to={`/project/${id}`}
+    className={"relative w-full rounded-md"}
+    textClassName={"w-full whitespace-nowrap overflow-clip text-sm"}
+    maskClassName={maskClass}
+    textValue={projectName}
+  />
+
   return (
     <div className={containerClass}>
       <div className="group px-2 py-3 h-full">
         <div className="relative group flex items-center gap-x-2 ">
           {/* Edit project name form or project name */}
-          {
-            isEditing ?
-              <UpdateForm
-                itemId={itemId}
-                isEditing={isEditing}
-                setEditing={setEditing}
-                projectName={projectName}
-                setProjectName={setProjectName}
-                inititalName={listItem.name}
-              />
-              :
-              <Link
-                to={`/project/${itemId}`}
-                className="relative w-full rounded-md"
-              >
-                <p className="w-full whitespace-nowrap overflow-clip text-sm">{projectName}</p>
-                <div
-                  className={maskClass}
-                ></div>
-              </Link>
-          }
+          {isEditing ? UpdateFormInstance : LinkInstance}
 
-          {/* Edit/Submit and Delete Buttons */}
-          {/* Edit/Submit Button - switch editing modes and submit form if in editting mode */}
-          <div
-            className={buttonClass}
-          >
-            <SideBarItemButton
-              name="edit"
-              imageClass={imageClass}
-              normalIcon={editIcon}
-              hoverIcon={editHoveredIcon}
-              onClickHandler={() => {
-                setEditing(!isEditing)
-              }
-              }
-            />
-
-            {/* Delete Form */}
-            <DeleteForm itemId={itemId} />
-
-            {/* Delete button - put outside form for alignment */}
-            <SideBarItemButton
-              form={`delete-${itemId}`}
-              type="submit"
-              name="delete"
-              imageClass={imageClass}
-              normalIcon={deleteIcon}
-              hoverIcon={deleteHoveredIcon}
-            />
-          </div>
+          {/* Edit and Delete Buttons */}
+          <SButtonGroup className={buttonClass}>
+            {EditButton}
+            {DeleteFormInstance}
+            {DeleteButton}
+          </SButtonGroup>
         </div>
       </div>
     </div>
