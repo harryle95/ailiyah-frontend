@@ -9,13 +9,24 @@ import { useState } from "react";
 
 function UpdateForm({ itemId, isEditing, setEditing, projectName, setProjectName, inititalName }) {
   const submit = useSubmit()
+  const [projectNameBeforeChange, setProjectNameBeforeChange] = useState(inititalName);
+
+  // Handler
   const submitHandler = (e) => {
     e.preventDefault()
     setEditing(!isEditing)
     if (projectName !== inititalName) {
+      setProjectNameBeforeChange(projectName)
       submit(e.currentTarget.form, { method: "PUT"})
     }
   }
+  const escHandler = (e) => {
+    if (e.keyCode === 27){
+      setProjectName(projectNameBeforeChange)
+      setEditing(!isEditing)
+    }
+  }
+  const changeHandler = (e) => setProjectName(e.target.value)
   return (
     <Form method="PUT"
       key={itemId}
@@ -27,8 +38,9 @@ function UpdateForm({ itemId, isEditing, setEditing, projectName, setProjectName
         className='overflow-auto h-full border-none outline-none bg-transparent'
         placeholder={projectName}
         value={projectName}
-        onChange={e => setProjectName(e.target.value)}
+        onChange={changeHandler}
         onBlur={submitHandler}
+        onKeyDown={escHandler}
         autoFocus
       />
     </Form>
