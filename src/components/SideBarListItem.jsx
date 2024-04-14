@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Link, Form, useLocation } from "react-router-dom";
+import { Link, Form, useLocation, useSubmit } from "react-router-dom";
 import deleteIcon from "../resources/delete.png";
 import deleteHoveredIcon from "../resources/delete_hover.png";
 import editIcon from "../resources/edit.png";
@@ -8,14 +8,18 @@ import { useState } from "react";
 
 
 function UpdateForm({ itemId, isEditing, setEditing, projectName, setProjectName, inititalName }) {
+  const submit = useSubmit()
+  const submitHandler = (e) => {
+    e.preventDefault()
+    setEditing(!isEditing)
+    if (projectName !== inititalName) {
+      submit(e.currentTarget.form, { method: "PUT"})
+    }
+  }
   return (
     <Form method="PUT"
-      onSubmit={(e) => {
-        setEditing(!isEditing)
-        if (projectName === inititalName) {
-          e.preventDefault()
-        }
-      }}>
+      key={itemId}
+      onSubmit={submitHandler}>
       <input name="id" value={itemId} className="hidden" readOnly />
       <input
         name="name"
@@ -24,13 +28,9 @@ function UpdateForm({ itemId, isEditing, setEditing, projectName, setProjectName
         placeholder={projectName}
         value={projectName}
         onChange={e => setProjectName(e.target.value)}
-        onBlur={() => {
-          document.getElementById(`edit-${itemId}`).click()
-        }
-        }
+        onBlur={submitHandler}
         autoFocus
       />
-      <input type="submit" id={`edit-${itemId}`} className="hidden"></input>
     </Form>
   )
 }
