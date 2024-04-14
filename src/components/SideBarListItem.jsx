@@ -89,7 +89,7 @@ export function SideBarListItem({ listItem }) {
   // If link is active -> set gradient from highlight bg color. Otherwise, only set gradient from black 
   let maskClass = isActive ? "absolute top-0 bottom-0 right-0 bg-gradient-to-l to-transparent w-20 from-60% from-slate-700" :
     "absolute top-0 bottom-0 right-0 bg-gradient-to-l to-transparent w-8 group-hover:w-20 group-hover:from-60% from-0% from-black group-hover:from-slate-700"
-  const imageClass = "min-w-5 max-w-5";
+  const imageClass = "max-w-5";
 
   // Edit and delete buttons 
   const EditButton = <SButton

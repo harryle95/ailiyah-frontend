@@ -42,14 +42,14 @@ export default function PromptForm({ initImage, initPrompt, projectId }) {
 
     // Upload/Submit Buttons
     const UploadButton = <SLabel
-        className="min-w-5 max-w-5"
+        className="max-w-5"
         htmlFor="file-upload"
         normalIcon={editIcon}
         hoverIcon={editHoveredIcon}
         title="Upload Input Image"
     />
     let buttonProps = {
-        className: "min-w-5 max-w-5",
+        className: "max-w-5",
         type: "submit",
         title: "Submit Request",
         normalIcon: deleteIcon,
@@ -70,7 +70,7 @@ export default function PromptForm({ initImage, initPrompt, projectId }) {
     // Thumbnail edit/remove buttons
     const EditImageButton = <SButton
         type="button"
-        className="min-w-5 max-w-5"
+        className="max-w-5"
         normalIcon={editIcon}
         hoverIcon={editHoveredIcon}
         title="Upload Input Image"
@@ -79,7 +79,7 @@ export default function PromptForm({ initImage, initPrompt, projectId }) {
 
     const RemoveImageButton = <SButton
         type="button"
-        className="min-w-5 max-w-5"
+        className="max-w-5"
         normalIcon={deleteIcon}
         hoverIcon={deleteHoveredIcon}
         title="Remove Input Image"

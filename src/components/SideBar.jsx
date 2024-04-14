@@ -22,41 +22,44 @@ function SideBarNav({ items, className }) {
     )
 }
 
-export function SideBar() {
+export function SideBar({ isVisible = true }) {
+    const width = isVisible ? "260px" : "0px"
     const items = useLoaderData();
     return (
         <div id="sidebar"
-            className="bg-black text-white w-[230px] h-dvh px-4 py-4 flex flex-col justify-between gap-y-4 overflow-auto flex-none">
-            <div id="sidebar-inner" className="flex flex-col gap-y-4 w-full" >
-                <IconPanel />
-                <SideBarNav items={items} className="w-full max-h-[640px]"/>
-            </div>
-
-            <div id="buttons" className="gap-y-4 flex flex-col">
-                {/* New Project Button */}
-                <div id="new-project-button"
-                    className="w-5/6 h-12 mx-auto min-h-12 flex justify-center items-center rounded-lg border-solid border-2 bg-black hover:bg-slate-700"
-                >
-                    <Form method="POST">
-                        <button type="submit">
-                            <div className="flex flex-row gap-2">
-                                <div>New Project</div>
-                            </div>
-                        </button>
-                    </Form>
+            className="bg-black text-white flex-none"
+            style={{ width: width }}
+        >
+            <div className="p-4 flex flex-col justify-between gap-y-4 h-dvh  overflow-auto">
+                <div id="sidebar-inner" className="flex flex-col gap-y-4 w-full" >
+                    <IconPanel />
+                    <SideBarNav items={items} className="w-full max-h-[640px]" />
                 </div>
 
-                {/* User Button */}
-                <div id="user-button"
-                    className="w-5/6 h-12 mx-auto min-h-12 flex justify-center items-center rounded-lg border-solid border-2 bg-black hover:bg-slate-700"
-                >
-                    <a href="#" className="flex flex-row gap-2">
-                        <div>My Profile</div>
-                    </a>
+                <div id="buttons" className="gap-y-4 flex flex-col">
+                    {/* New Project Button */}
+                    <div id="new-project-button"
+                        className="w-5/6 h-12 mx-auto min-h-12 flex justify-center items-center rounded-lg border-solid border-2 bg-black hover:bg-slate-700"
+                    >
+                        <Form method="POST">
+                            <button type="submit">
+                                <div className="flex flex-row gap-2">
+                                    <div>New Project</div>
+                                </div>
+                            </button>
+                        </Form>
+                    </div>
+
+                    {/* User Button */}
+                    <div id="user-button"
+                        className="w-5/6 h-12 mx-auto min-h-12 flex justify-center items-center rounded-lg border-solid border-2 bg-black hover:bg-slate-700"
+                    >
+                        <a href="#" className="flex flex-row gap-2">
+                            <div>My Profile</div>
+                        </a>
+                    </div>
                 </div>
             </div>
-
         </div>
-
     )
 }
