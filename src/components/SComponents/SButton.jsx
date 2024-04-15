@@ -1,22 +1,23 @@
-import { forwardRef, useState } from "react";
+import { forwardRef } from "react";
 
-const SButton = forwardRef(({imageClass, normalIcon, hoverIcon, ...rest}, ref) => {
-    const [isHovered, setIsHovered] = useState(false);
-    const enterHandler = () => setIsHovered(true);
-    const leaveHandler = () => setIsHovered(false);
-    let buttonProps = { ...rest, onMouseOver: enterHandler, onMouseLeave: leaveHandler }
+const SButton = forwardRef(
+  (
+    {
+      buttonElement = "button",
+      imgSrc,
+      imgClassName = "hover:opacity-50",
+      ...rest
+    },
+    ref
+  ) => {
+    const Element = buttonElement;
     return (
-        <button {...buttonProps} ref={ref}
-        >
-            {isHovered ?
-                <img className={imageClass} src={hoverIcon} />
-                :
-                <img className={imageClass} src={normalIcon} />
-            }
-        </button>
-    )
-});
+      <Element {...rest} ref={ref}>
+        <img src={imgSrc} alt="button" className={imgClassName} />
+      </Element>
+    );
+  }
+);
 
-SButton.displayName = "SButton"
-
+SButton.displayName = "SButton";
 export default SButton;

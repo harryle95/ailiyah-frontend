@@ -6,7 +6,6 @@ import editIcon from "../resources/edit.png";
 import editHoveredIcon from "../resources/edit_hover.png";
 import SButton from "./SComponents/SButton";
 import SButtonGroup from "./SComponents/SButtonGroup";
-import SLabel from "./SComponents/SLabel";
 import PreviewThumbnail from "./PreviewThumbnail";
 
 
@@ -41,8 +40,9 @@ export default function PromptForm({ initImage, initPrompt, projectId }) {
     }
 
     // Upload/Submit Buttons
-    const UploadButton = <SLabel
-        className="max-w-5"
+    const UploadButton = <SButton
+        buttonType="label"
+        className="min-w-5 max-w-5"
         htmlFor="file-upload"
         normalIcon={editIcon}
         hoverIcon={editHoveredIcon}
