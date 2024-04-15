@@ -1,10 +1,11 @@
 import { Form, useSubmit } from "react-router-dom";
 import { useState, useRef } from "react";
-import deleteIcon from "../resources/delete.png";
-import deleteHoveredIcon from "../resources/delete_hover.png";
-import editIcon from "../resources/edit.png";
-import editHoveredIcon from "../resources/edit_hover.png";
+import deleteIcon from "../resources/trash.svg";
+import editIcon from "../resources/pencil-square.svg";
 import SButton from "./SComponents/SButton";
+
+import uploadIcon from "../resources/plus.svg";
+import submitIcon from "../resources/arrow-up.svg";
 import SButtonGroup from "./SComponents/SButtonGroup";
 import PreviewThumbnail from "./PreviewThumbnail";
 
@@ -41,19 +42,17 @@ export default function PromptForm({ initImage, initPrompt, projectId }) {
 
     // Upload/Submit Buttons
     const UploadButton = <SButton
-        buttonType="label"
-        className="min-w-5 max-w-5"
+        buttonElement="label"
+        className="w-5"
         htmlFor="file-upload"
-        normalIcon={editIcon}
-        hoverIcon={editHoveredIcon}
         title="Upload Input Image"
+        imgSrc={uploadIcon}
     />
     let buttonProps = {
-        className: "max-w-5",
+        className: "w-5",
         type: "submit",
         title: "Submit Request",
-        normalIcon: deleteIcon,
-        hoverIcon: deleteHoveredIcon
+        imgSrc: submitIcon
     }
 
     const SubmitButton = formData.prompt === "" ?
@@ -61,7 +60,7 @@ export default function PromptForm({ initImage, initPrompt, projectId }) {
         <SButton {...buttonProps} />
 
     const UploadSubmitButtonGroup = (
-        <SButtonGroup className="flex absolute bottom-2 right-2">
+        <SButtonGroup className="flex absolute bottom-3 right-2 items-center justify-between w-12">
             {UploadButton}
             {SubmitButton}
         </SButtonGroup>
@@ -70,24 +69,22 @@ export default function PromptForm({ initImage, initPrompt, projectId }) {
     // Thumbnail edit/remove buttons
     const EditImageButton = <SButton
         type="button"
-        className="max-w-5"
-        normalIcon={editIcon}
-        hoverIcon={editHoveredIcon}
+        className="w-5"
+        imgSrc={editIcon}
         title="Upload Input Image"
         onClick={e => { e.preventDefault; console.log("Clicking on edit image button") }}
     />
 
     const RemoveImageButton = <SButton
         type="button"
-        className="max-w-5"
-        normalIcon={deleteIcon}
-        hoverIcon={deleteHoveredIcon}
+        className="w-5"
+        imgSrc={deleteIcon}
         title="Remove Input Image"
         onClick={onRemoveHandler}
     />
 
     const ThumbnailButtonGroup = <SButtonGroup
-        className="hidden group-hover:flex absolute top-2 right-2">
+        className="hidden group-hover:flex absolute top-2 right-2 items-center gap-y-4">
         {EditImageButton}
         {RemoveImageButton}
     </SButtonGroup>

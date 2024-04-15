@@ -1,12 +1,11 @@
 import { Link, Form, useLocation, useSubmit } from "react-router-dom";
-import deleteIcon from "../resources/delete.png";
-import deleteHoveredIcon from "../resources/delete_hover.png";
-import editIcon from "../resources/edit.png";
-import editHoveredIcon from "../resources/edit_hover.png";
+import editIcon from "../resources/pencil-square.svg";
+import deleteIcon from "../resources/trash.svg";
 import { useState } from "react";
 import SButton from "./SComponents/SButton";
 import SButtonGroup from "./SComponents/SButtonGroup";
 
+console.log(editIcon)
 
 function UpdateForm({ id, isEditing, setEditing, projectName, setProjectName, inititalName }) {
   const submit = useSubmit()
@@ -38,7 +37,7 @@ function UpdateForm({ id, isEditing, setEditing, projectName, setProjectName, in
       <input
         name="name"
         type="text"
-        className='overflow-auto h-full w-full border-none outline-none bg-transparent text-sm'
+        className='overflow-x-auto h-full w-full border-none outline-none bg-transparent text-sm'
         placeholder={projectName}
         value={projectName}
         onChange={changeHandler}
@@ -80,7 +79,7 @@ export function SideBarListItem({ listItem }) {
 
   // If link is active, but not editing -> show buttons. If editting -> hide buttons. If neither -> hover shows button 
   let buttonClass = isEditing ? "hidden" :
-    isActive ? "absolute top-0 bottom-0 right-0" :
+    isActive ? "absolute top-0 bottom-0 right-0 flex" :
       "hidden group-hover:flex absolute top-0 bottom-0 right-0"
 
   // If link is active -> set bg color. If link is not active, set bg color on hover 
@@ -89,28 +88,24 @@ export function SideBarListItem({ listItem }) {
   // If link is active -> set gradient from highlight bg color. Otherwise, only set gradient from black 
   let maskClass = isActive ? "absolute top-0 bottom-0 right-0 bg-gradient-to-l to-transparent w-20 from-60% from-slate-700" :
     "absolute top-0 bottom-0 right-0 bg-gradient-to-l to-transparent w-8 group-hover:w-20 group-hover:from-60% from-0% from-black group-hover:from-slate-700"
-  const imageClass = "max-w-5";
 
   // Edit and delete buttons 
   const EditButton = <SButton
     name="edit"
-    imageClass={imageClass}
-    normalIcon={editIcon}
-    hoverIcon={editHoveredIcon}
-    onClick={() => {
+    onClick={() =>
       setEditing(!isEditing)
     }
-    }
+    imgSrc={editIcon}
     title="Edit Project's Name"
+    className="w-5"
   />
 
   const DeleteButton = <SButton
     form={`delete-${id}`}
     type="submit"
     name="delete"
-    imageClass={imageClass}
-    normalIcon={deleteIcon}
-    hoverIcon={deleteHoveredIcon}
+    imgSrc={deleteIcon}
+    className="w-5"
     title="Delete Project"
   />
 
@@ -123,6 +118,7 @@ export function SideBarListItem({ listItem }) {
     projectName={projectName}
     setProjectName={setProjectName}
     inititalName={listItem.name}
+    
   />
 
   const DeleteFormInstance = <DeleteForm id={id} />

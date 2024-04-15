@@ -1,6 +1,6 @@
 import { forwardRef, useState } from "react";
-import expandIcon from "../assets/expand.svg";
-import collapseIcon from "../assets/collapse.svg";
+import expandIcon from "../../resources/chevron-right.svg";
+import collapseIcon from "../../resources/chevron-left.svg";
 import ToggleButton from "./ToggleButton";
 
 const NavBar = forwardRef(({ children, ...rest }, ref) => {
@@ -31,12 +31,12 @@ const NavBar = forwardRef(({ children, ...rest }, ref) => {
   return (
     <div {...rest} ref={ref}>
       <div
-        className="c-nav-bar-content h-full overflow-auto bg-gray-200"
+        className="c-nav-bar-content h-full overflow-auto"
         style={{ width: width }}
       >
         {children}
       </div>
-      <div className="c-nav-bar-button h-full w-5 relative bg-gray-100 rounded-r-md">
+      <div className="c-nav-bar-button h-full w-5 relative bg-gray-600 rounded-r-md">
         {ExpandCollapseButton}
       </div>
     </div>

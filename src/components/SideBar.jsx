@@ -1,7 +1,7 @@
 import { useLoaderData, Form } from "react-router-dom";
 import logo from "../resources/logo.png";
 import { SideBarListItem } from "./SideBarListItem";
-
+import NavBar from "./SComponents/NavBar";
 
 function IconPanel() {
     return (
@@ -15,51 +15,52 @@ function IconPanel() {
 function SideBarNav({ items, className }) {
     return (
         <nav className={className}>
-            <div className="flex flex-col overflow-x-hidden overflow-y-auto">
+            <div className="flex flex-col overflow-x-hidden h-full">
                 {items && items.map((item) => <SideBarListItem key={item.id} listItem={item} />)}
             </div>
         </nav>
     )
 }
 
-export function SideBar({ isVisible = true }) {
-    const width = isVisible ? "260px" : "0px"
+function ProfileButton() {
+    return <div id="user-button"
+        className="w-5/6 h-12 mx-auto min-h-12 flex justify-center items-center rounded-lg border-solid border-2 bg-black hover:bg-slate-700"
+    >
+        <a href="#" className="flex flex-row gap-2">
+            <div>My Profile</div>
+        </a>
+    </div>
+}
+
+function NewProjectButton() {
+    return <div id="new-project-button"
+        className="w-5/6 h-12 mx-auto min-h-12 flex justify-center items-center rounded-lg border-solid border-2 bg-black hover:bg-slate-700"
+    >
+        <Form method="POST">
+            <button type="submit">
+                <div className="flex flex-row gap-2">
+                    <div>New Project</div>
+                </div>
+            </button>
+        </Form>
+    </div>
+}
+
+export function SideBar() {
     const items = useLoaderData();
     return (
-        <div id="sidebar"
-            className="bg-black text-white flex-none"
-            style={{ width: width }}
-        >
-            <div className="p-4 flex flex-col justify-between gap-y-4 h-dvh  overflow-auto">
-                <div id="sidebar-inner" className="flex flex-col gap-y-4 w-full" >
+        <NavBar className='h-screen w-fit flex bg-black text-white flex-shrink-0'>
+            <div className="pl-4 py-5 pr-3 flex flex-col gap-y-4 h-full">
+                <div id="sidebar-inner" className="flex flex-col gap-y-4 w-full h-full overflow-auto" >
                     <IconPanel />
-                    <SideBarNav items={items} className="w-full max-h-[640px]" />
+                    <SideBarNav items={items} className="w-full" />
                 </div>
 
                 <div id="buttons" className="gap-y-4 flex flex-col">
-                    {/* New Project Button */}
-                    <div id="new-project-button"
-                        className="w-5/6 h-12 mx-auto min-h-12 flex justify-center items-center rounded-lg border-solid border-2 bg-black hover:bg-slate-700"
-                    >
-                        <Form method="POST">
-                            <button type="submit">
-                                <div className="flex flex-row gap-2">
-                                    <div>New Project</div>
-                                </div>
-                            </button>
-                        </Form>
-                    </div>
-
-                    {/* User Button */}
-                    <div id="user-button"
-                        className="w-5/6 h-12 mx-auto min-h-12 flex justify-center items-center rounded-lg border-solid border-2 bg-black hover:bg-slate-700"
-                    >
-                        <a href="#" className="flex flex-row gap-2">
-                            <div>My Profile</div>
-                        </a>
-                    </div>
+                    <NewProjectButton />
+                    <ProfileButton />
                 </div>
             </div>
-        </div>
+        </NavBar >
     )
 }
