@@ -1,11 +1,15 @@
+import { forwardRef } from "react";
 
-
-export default function SButtonGroup({ className, children }) {
+const SButtonGroup = forwardRef(
+  ({ children, className = "flex items-center gap-y-4", ...rest }, ref) => {
+    let classNameValue = `c-button-group ${className}`;
     return (
-        <div className={className}>
-            <div className="flex items-center gap-y-4">
-                {children}
-            </div>
-        </div>
-    )
-}
+      <div className={classNameValue} ref={ref} {...rest}>
+        {children}
+      </div>
+    );
+  }
+);
+
+SButtonGroup.displayName = "SButtonGroup";
+export default SButtonGroup;
