@@ -101,13 +101,13 @@ export const defaultTheme: PresetTheme = {
     twHeight: "h-full",
     twOpacity: "opacity-100 hover:opacity-50",
   },
-  TooltipContent: {
+  TooltipPopoverContent: {
     twTextColor: "text-neutral-100 dark:text-neutral-800",
     twBackgroundColor: "bg-gray-900 dark:bg-gray-50",
     twBoxShadow: "shadow-md",
     twBoxShadowColor: "shadow-gray-100 dark:shadow-gray-900",
   },
-  TooltipArrow: {
+  TooltipPopoverArrow: {
     twFill: "fill-gray-900 dark:fill-gray-50",
   },
   InvisibleButtonsLayout: {
