@@ -10,15 +10,16 @@ import {
   DotsHorizontalIcon as _DotsHorizontalIcon,
   DotsVerticalIcon as _DotsVerticalIcon,
 } from "@radix-ui/react-icons";
-import { AlertDialog, Button, Flex } from "@radix-ui/themes";
+import * as AlertDialog from "@radix-ui/react-alert-dialog";
+import * as Popover from "@radix-ui/react-popover";
 import { styled } from "../context/factory";
-import { Popover } from "@radix-ui/themes";
 import { Tooltip } from "./Tooltip";
 import {
   DoubleArrowLeftIcon,
   DoubleArrowRightIcon,
 } from "@radix-ui/react-icons";
-
+import "./Alert.css";
+import "./Popover.css";
 
 type ButtonProps = React.ComponentPropsWithoutRef<"button">;
 
@@ -58,33 +59,34 @@ const DeleteAlertButton = React.forwardRef<HTMLButtonElement, DeleteAlertProps>(
 
     return (
       <AlertDialog.Root>
-        <Tooltip tooltipContent={tooltipContent}>
-          <AlertDialog.Trigger>
-            <styled.button {...rest} ref={ref}>
-              <DeleteIcon themeName="Icons" />
-            </styled.button>
-          </AlertDialog.Trigger>
-        </Tooltip>
-
-        <AlertDialog.Content maxWidth="450px">
-          <AlertDialog.Title>{dialogTitle}</AlertDialog.Title>
-          <AlertDialog.Description size="2">
-            {dialogDescription}
-          </AlertDialog.Description>
-
-          <Flex gap="3" mt="4" justify="end">
-            <AlertDialog.Cancel>
-              <Button variant="soft" color="gray" onClick={dialogOnCancel}>
-                {dialogCancelButtonName}
-              </Button>
-            </AlertDialog.Cancel>
-            <AlertDialog.Action>
-              <Button variant="solid" color="red" onClick={dialogOnSubmit}>
-                {dialogSubmitButtonName}
-              </Button>
-            </AlertDialog.Action>
-          </Flex>
-        </AlertDialog.Content>
+        <AlertDialog.Trigger asChild>
+          <DeleteButton {...rest} ref={ref} tooltipContent={tooltipContent} />
+        </AlertDialog.Trigger>
+        <AlertDialog.Portal>
+          <AlertDialog.Overlay className="AlertDialogOverlay" />
+          <AlertDialog.Content className="AlertDialogContent">
+            <AlertDialog.Title className="AlertDialogTitle">
+              {dialogTitle}
+            </AlertDialog.Title>
+            <AlertDialog.Description className="AlertDialogDescription">
+              {dialogDescription}
+            </AlertDialog.Description>
+            <div
+              style={{ display: "flex", gap: 25, justifyContent: "flex-end" }}
+            >
+              <AlertDialog.Cancel asChild>
+                <button className="Button mauve" onClick={dialogOnCancel}>
+                  Cancel
+                </button>
+              </AlertDialog.Cancel>
+              <AlertDialog.Action asChild>
+                <button className="Button red" onClick={dialogOnSubmit}>
+                  Yes, Delete
+                </button>
+              </AlertDialog.Action>
+            </div>
+          </AlertDialog.Content>
+        </AlertDialog.Portal>
       </AlertDialog.Root>
     );
   }
@@ -151,12 +153,15 @@ const DotsVerticalButton = createButton(
 );
 
 const LeftIcon = styled(DoubleArrowLeftIcon);
-const LeftButton = createButton("LeftButton", <LeftIcon themeName="Icons"/>)
+const LeftButton = createButton("LeftButton", <LeftIcon themeName="Icons" />);
 const RightIcon = styled(DoubleArrowRightIcon);
-const RightButton = createButton("RightButton", <RightIcon themeName="Icons"/>)
+const RightButton = createButton(
+  "RightButton",
+  <RightIcon themeName="Icons" />
+);
 
 interface PopOverButtonContentProps
-  extends Omit<Popover.ContentProps, "asChild">,
+  extends Omit<Popover.PopoverContentProps, "asChild">,
     ITailwindTheme {
   icon?: React.JSX.Element;
 }
@@ -166,13 +171,19 @@ const PopOverButtonGroup = React.forwardRef<
   PopOverButtonContentProps
 >((props, ref) => {
   const { icon = <DotsHorizontalButton />, children, ...rest } = props;
-  const Content = styled(Popover.Content);
+  const Content = styled(Popover.Content)
+  const Arrow = styled(Popover.Arrow)
   return (
     <Popover.Root>
-      <Popover.Trigger>{icon}</Popover.Trigger>
-      <Content {...rest} ref={ref}>
-        {children}
-      </Content>
+      <Popover.Trigger asChild>{icon}</Popover.Trigger>
+      <Popover.Portal>
+        <Content className="PopoverContent" themeName="TooltipPopoverContent" sideOffset={5}>
+          <styled.div {...rest} ref={ref}>
+            {children}
+          </styled.div>
+          <Arrow className="PopoverArrow" themeName="TooltipPopoverArrow"/>
+        </Content>
+      </Popover.Portal>
     </Popover.Root>
   );
 });
@@ -206,8 +217,6 @@ const InvisibleButtonGroup = React.forwardRef<
 
 InvisibleButtonGroup.displayName = "InvisibleButtonGroup";
 
-
-
 export {
   AddButton,
   DeleteButton,
@@ -232,5 +241,5 @@ export {
   LeftButton,
   RightIcon,
   RightButton,
-  createButton
+  createButton,
 };
