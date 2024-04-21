@@ -121,6 +121,7 @@ const TextBoxUpdateForm: React.FC<TextBoxUpdateFormProps> = (props) => {
 };
 
 const TextBoxItem: React.FC<ProjectDTO> = (props) => {
+  const submit = useSubmit();
   const { id, name, ...rest } = props;
   const projectURL = `/project/${id}`;
   // States
@@ -139,9 +140,6 @@ const TextBoxItem: React.FC<ProjectDTO> = (props) => {
       {...rest}
     >
       <styled.div twPosition="relative" twWidth="w-full" twHeight="h-full">
-        <RouterForm method="DELETE" id={`delete-${id}`}>
-          <input name="id" value={id} className="hidden" readOnly />
-        </RouterForm>
         {!editingState ? (
           <>
             <Text.Content>
@@ -162,9 +160,19 @@ const TextBoxItem: React.FC<ProjectDTO> = (props) => {
                   tooltipContent="Edit"
                   onClick={() => setEditingState(!editingState)}
                 />
-                <Button.DeleteButton
-                  form={`delete-${id}`}
+                <Button.DeleteAlertButton
                   tooltipContent="Delete"
+                  dialogTitle="Delete Project"
+                  dialogDescription="This action is PERMANENT. Are you sure you want to delete this project and all its content?"
+                  dialogCancelButtonName="Cancel"
+                  dialogSubmitButtonName="Delete"
+                  dialogOnCancel={() => {}}
+                  dialogOnSubmit={(e) => {
+                    e.preventDefault();
+                    const formData = new FormData();
+                    formData.append("id", id);
+                    submit(formData, { method: "DELETE" });
+                  }}
                 />
               </Button.InvisibleButtonGroup>
             </Text.Component>
