@@ -11,6 +11,9 @@ import ErrorPage from "./routes/error";
 import ContentPanel from "./components/ContentPanel";
 import ResultPanel from "./components/ResultPanel";
 import { actionMakeRequest, actionHandleRequest, loaderRequestID, actionLogRequest } from "./services/request_helpers";
+import { ThemeProvider } from './components/context/ThemeContext.tsx'
+import { Theme as RadixTheme } from '@radix-ui/themes';
+
 
 const router = createBrowserRouter([
   {
@@ -31,7 +34,7 @@ const router = createBrowserRouter([
 
             children: [{
               path: "/project/:projectId/create",
-              element: <ResultPanel/>,
+              element: <ResultPanel />,
               action: actionMakeRequest,
             },
             {
@@ -50,6 +53,12 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    {/* <RadixTheme> */}
+
+      <ThemeProvider>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    {/* </RadixTheme> */}
+
   </React.StrictMode>
 );

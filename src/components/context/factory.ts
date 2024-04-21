@@ -7,7 +7,7 @@ export type TailwindProps<T extends ElementType> =
   React.ComponentPropsWithoutRef<T> & ITailwindTheme;
 
 export type TailwindComponent<T extends ElementType> = FunctionComponent<
-  TailwindProps<T> & { ref: any }
+  TailwindProps<T> & { ref?: any }
 >;
 
 type JSXElement = {
@@ -21,7 +21,7 @@ type JSXFactory = {
 export type StyledFactoryFn = JSXElement & JSXFactory;
 
 const styledFn = (element: any) => {
-  const SComponent = React.forwardRef<any, any>((props, ref) => {
+  const SComponent = React.forwardRef<HTMLAnchorElement, any>((props, ref) => {
     const theme = useThemeContext();
     const { className, rest } = Theme.getClassName(props, theme);
 
@@ -50,3 +50,13 @@ const styledProxy = new Proxy(styledFn, {
 });
 
 export const styled = styledProxy as unknown as StyledFactoryFn;
+
+
+type IntrinsicElementType = keyof JSX.IntrinsicElements
+
+export const createElement = (element: IntrinsicElementType, displayName: string) => {
+  const Component = styled(element)
+  Component.displayName = displayName;
+  return Component;
+}
+
