@@ -1,7 +1,6 @@
 import * as React from "react";
-import * as Text from "./primitives/TextBox";
-import * as Button from "./built/Buttons";
-import * as Form from "./primitives/Form";
+import {Primitive, Themed} from "ailiyah-ui"
+
 import {
   useLocation,
   Link,
@@ -13,7 +12,11 @@ import { ProjectDTO } from "../services/project";
 import { styled } from "./context/factory";
 // @ts-ignore
 import logo from "../resources/logo.png";
-import * as NavBar from "./built/NavBar";
+
+const NavBar = Themed.NavBar;
+const Text = Primitive.TextBox;
+const Button = Themed.Button;
+const Form = Primitive.Form;
 
 const IconPanel: React.FC<{}> = () => {
   return (
