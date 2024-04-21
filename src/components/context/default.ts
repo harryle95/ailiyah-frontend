@@ -11,10 +11,12 @@ export const defaultTheme: PresetTheme = {
     twFlex: "flex",
     // Padding set to 0 when collapsed (inactive)
     twPadding:
-      "pl-3 py-2 data-[state=inactive]:pl-0 data-[state=inactive]:py-0",
+      "pl-4 py-4 data-[state=inactive]:pl-0 data-[state=inactive]:py-0",
     twFlexDirection: "flex-row-reverse",
-    twBorderRadius: "rounded-r-md",
     twBackgroundColor: "bg-neutral-100 dark:bg-neutral-900",
+    // Different text color for active/inactive and light/dark modes
+    twTextColor:
+      "text-neutral-700 data-[state=active]:text-neutral-500 dark:text-neutral-400 dark:data-[state=active]:text-neutral-300",
   },
   NavBarTrigger: {
     twHeight: "h-full",
@@ -28,7 +30,7 @@ export const defaultTheme: PresetTheme = {
     twHeight: "h-full",
     twOverflow: "overflow-auto",
     twFlex: "flex flex-col",
-    twGap: "gap-y-3"
+    twGap: "gap-y-5",
   },
   NavBarContentHeader: {
     twFlexShrink: "flex-shrink-0",
@@ -39,15 +41,13 @@ export const defaultTheme: PresetTheme = {
     twOrder: "order-2",
     twOverflow: "overflow-auto",
     twFlex: "flex flex-col",
+    twGap: "gap-y-4",
   },
   NavBarContentFooter: {
     twFlexShrink: "flex-shrink-0",
     twOrder: "order-3",
   },
   NavBarTextBoxRoot: {
-    // Different text color for active/inactive and light/dark modes
-    twTextColor:
-      "text-neutral-700 data-[state=active]:text-neutral-500 dark:text-neutral-400 dark:data-[state=active]:text-neutral-300",
     // Different bg color for active/inactive and light/dark modes
     twBackgroundColor:
       "data-[state=active]:bg-neutral-300 dark:data-[state=active]:bg-neutral-700",
@@ -81,6 +81,20 @@ export const defaultTheme: PresetTheme = {
     twBackgroundColor: "bg-transparent",
     twBorderWidth: "border-none",
     twOutlineColor: "outline-none",
+  },
+  NavBarButtons: {
+    twWidth: "w-5/6",
+    twHeight: "h-fit",
+    twMargin: "mx-auto",
+    twFlex: "flex",
+    twPadding: "py-1",
+    twAlignItems: "item-center",
+    twJustifyContent: "justify-center",
+    twBorderWidth: "border-2",
+    twBorderRadius: "rounded-md",
+    twBorderStyle: "border-solid",
+    twBackgroundColor:
+      "bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600",
   },
   Icons: {
     twWidth: "w-full",

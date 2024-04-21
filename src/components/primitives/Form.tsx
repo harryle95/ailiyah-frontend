@@ -85,7 +85,7 @@ interface IFormContext {
 
 interface FormProps extends Omit<_FormProps, "children" | "onSubmit"> {
   children: React.ReactNode | ((formContext: IFormContext) => React.ReactNode);
-  onSubmit:
+  onSubmit?:
     | React.FormEvent<HTMLFormElement>
     | React.MouseEventHandler<HTMLButtonElement>
     | React.KeyboardEventHandler<HTMLInputElement>

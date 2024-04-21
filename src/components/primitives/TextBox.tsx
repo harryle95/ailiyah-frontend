@@ -104,7 +104,7 @@ const Root = React.forwardRef<HTMLDivElement, TextBoxProps>((props, ref) => {
     onMouseLeave,
     ...rest
   } = props;
-  const [internalActive, setInternalActive] = React.useState(activeState);
+  const [internalActive, setInternalActive] = React.useState(false);
   const hoverOn = (e: React.MouseEvent<HTMLDivElement>) => {
     onMouseEnter && onMouseEnter(e);
     if (hoverSetActive) {
@@ -114,11 +114,11 @@ const Root = React.forwardRef<HTMLDivElement, TextBoxProps>((props, ref) => {
   const hoverOff = (e: React.MouseEvent<HTMLDivElement>) => {
     onMouseLeave && onMouseLeave(e);
     if (hoverSetActive) {
-      setInternalActive(activeState);
+      setInternalActive(false);
     }
   };
 
-  const dataState = internalActive ? "active" : "inactive";
+  const dataState = activeState || internalActive ? "active" : "inactive";
   return (
     <TextBoxContext.Provider value={{ activeState: dataState }}>
       <styled.div

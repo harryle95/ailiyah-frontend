@@ -48,6 +48,7 @@ export async function updateProject(id: string, data: ProjectDTO): Promise<Proje
         },
         body: JSON.stringify(data),
     });
+    console.log(JSON.stringify(data))
     const result = await coroutine.json();
     return result;
 }

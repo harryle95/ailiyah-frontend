@@ -2,9 +2,78 @@ import * as React from "react";
 import * as Text from "./primitives/TextBox";
 import * as Button from "./built/Buttons";
 import * as Form from "./primitives/Form";
-import { useLocation, Link } from "react-router-dom";
+import {
+  useLocation,
+  Link,
+  useSubmit,
+  useLoaderData,
+  Form as RouterForm,
+} from "react-router-dom";
 import { ProjectDTO } from "../services/project";
 import { styled } from "./context/factory";
+// @ts-ignore
+import logo from "../resources/logo.png";
+import * as NavBar from "./built/NavBar";
+
+const IconPanel: React.FC<{}> = () => {
+  return (
+    <div className="flex items-center gap-4">
+      <img className="w-14 h-14" src={logo} alt="logo" />
+      <div className="font-sans font-bold text-xl">AILYAH</div>
+    </div>
+  );
+};
+
+const ProfileButton: React.FC<{}> = () => {
+  return (
+    <styled.div themeName="NavBarButtons">
+      <a href="#" className="flex flex-row gap-2">
+        <div>My Profile</div>
+      </a>
+    </styled.div>
+  );
+};
+
+const NewProjectButton: React.FC<{}> = () => {
+  return (
+    <styled.div themeName="NavBarButtons">
+      <Form.Root method="POST">
+        <button type="submit">
+          <div className="flex flex-row gap-2">
+            <div>New Project</div>
+          </div>
+        </button>
+      </Form.Root>
+    </styled.div>
+  );
+};
+
+const Root: React.FC<{}> = () => {
+  const projects = useLoaderData() as unknown as Array<ProjectDTO>;
+  return (
+    <NavBar.Root>
+      <NavBar.Trigger />
+      <NavBar.Content>
+        <NavBar.Header>
+          <IconPanel />
+        </NavBar.Header>
+        <NavBar.Body twOther="scrollbar-thin">
+          {projects ? (
+            projects.map(({ id, name }) => (
+              <TextBoxItem key={id} id={id} name={name} />
+            ))
+          ) : (
+            <></>
+          )}
+        </NavBar.Body>
+        <NavBar.Footer twPadding="py-3" twFlex="flex flex-col" twGap="gap-y-3">
+          <NewProjectButton />
+          <ProfileButton />
+        </NavBar.Footer>
+      </NavBar.Content>
+    </NavBar.Root>
+  );
+};
 
 interface TextBoxUpdateFormProps
   extends React.ComponentPropsWithoutRef<"form"> {
@@ -17,15 +86,14 @@ interface TextBoxUpdateFormProps
 const TextBoxUpdateForm: React.FC<TextBoxUpdateFormProps> = (props) => {
   const { projectName, setProjectName, id, setEditingState } = props;
   const [name, setName] = React.useState(projectName);
+  const submit = useSubmit();
+
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("Submitting Form Event received");
     setEditingState(false);
-    if (name === projectName) {
-      console.log("Name was not changed");
-    } else {
-      console.log("Name was changed -> Submit");
+    if (name !== projectName) {
       setProjectName(name);
+      submit(e.currentTarget.form, { method: "PUT" });
     }
   };
 
@@ -52,8 +120,7 @@ const TextBoxUpdateForm: React.FC<TextBoxUpdateFormProps> = (props) => {
   );
 };
 
-export const NavBarTextBoxItem: React.FC<ProjectDTO> = (props) => {
-  console.log(props);
+const TextBoxItem: React.FC<ProjectDTO> = (props) => {
   const { id, name, ...rest } = props;
   const projectURL = `/project/${id}`;
   // States
@@ -67,12 +134,14 @@ export const NavBarTextBoxItem: React.FC<ProjectDTO> = (props) => {
   return (
     <Text.Root
       themeName="NavBarTextBoxRoot"
-      //   activeState={true}
       activeState={activeState || editingState}
       hoverSetActive={true}
       {...rest}
     >
       <styled.div twPosition="relative" twWidth="w-full" twHeight="h-full">
+        <RouterForm method="DELETE" id={`delete-${id}`}>
+          <input name="id" value={id} className="hidden" readOnly />
+        </RouterForm>
         {!editingState ? (
           <>
             <Text.Content>
@@ -93,13 +162,16 @@ export const NavBarTextBoxItem: React.FC<ProjectDTO> = (props) => {
                   tooltipContent="Edit"
                   onClick={() => setEditingState(!editingState)}
                 />
-                <Button.DeleteButton tooltipContent="Delete" />
+                <Button.DeleteButton
+                  form={`delete-${id}`}
+                  tooltipContent="Delete"
+                />
               </Button.InvisibleButtonGroup>
             </Text.Component>
           </>
         ) : (
           <TextBoxUpdateForm
-            id="#"
+            id={id}
             projectName={projectName}
             setProjectName={setName}
             setEditingState={setEditingState}
@@ -109,3 +181,5 @@ export const NavBarTextBoxItem: React.FC<ProjectDTO> = (props) => {
     </Text.Root>
   );
 };
+
+export { Root };
