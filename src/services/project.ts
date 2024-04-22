@@ -4,15 +4,14 @@ export interface RequestDTO{
     prompt: string 
 }
 
-export interface ProjectDTO{
-    id: string
-    name: string
-    requests: Array<RequestDTO>
-}
 
-export interface ProjectLiteDTO{
+export interface ProjectDTO{
     id: string 
     name: string 
+}
+
+export interface ProjectDTOWithRequests extends ProjectDTO{
+    requests: Array<RequestDTO>
 }
 
 const PROJECT_URL = "http://127.0.0.1:8000/project";
@@ -29,7 +28,7 @@ export async function getProjectByID(id: string): Promise<ProjectDTO> {
     return result
 }
 
-export async function createProject(data: ProjectLiteDTO): Promise<ProjectDTO> {
+export async function createProject(data: ProjectDTO): Promise<ProjectDTO> {
     const coroutine = await fetch(PROJECT_URL, {
         method: "POST",
         headers: {
@@ -41,7 +40,7 @@ export async function createProject(data: ProjectLiteDTO): Promise<ProjectDTO> {
     return result;
 }
 
-export async function updateProject(id: string, data: ProjectLiteDTO): Promise<ProjectDTO>{
+export async function updateProject(id: string, data: ProjectDTO): Promise<ProjectDTO>{
     const coroutine = await fetch(`${PROJECT_URL}/${id}`, {
         method: "PUT",
         headers: {
@@ -49,6 +48,7 @@ export async function updateProject(id: string, data: ProjectLiteDTO): Promise<P
         },
         body: JSON.stringify(data),
     });
+    console.log(JSON.stringify(data))
     const result = await coroutine.json();
     return result;
 }
