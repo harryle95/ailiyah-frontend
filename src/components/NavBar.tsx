@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Primitive, Themed} from "ailiyah-ui"
+import { Primitive, Themed, Context } from "ailiyah-ui";
 
 import {
   useLocation,
@@ -9,7 +9,6 @@ import {
   Form as RouterForm,
 } from "react-router-dom";
 import { ProjectDTO } from "../services/project";
-import { styled } from "./context/factory";
 // @ts-ignore
 import logo from "../resources/logo.png";
 
@@ -17,6 +16,7 @@ const NavBar = Themed.NavBar;
 const Text = Primitive.TextBox;
 const Button = Themed.Button;
 const Form = Primitive.Form;
+const styled = Context.styled;
 
 const IconPanel: React.FC<{}> = () => {
   return (

@@ -11,7 +11,7 @@ import ErrorPage from "./routes/error";
 import ContentPanel from "./components/ContentPanel";
 import ResultPanel from "./components/ResultPanel";
 import { actionMakeRequest, actionHandleRequest, loaderRequestID, actionLogRequest } from "./services/request_helpers";
-import { ThemeProvider } from './components/context/ThemeContext.tsx'
+import { Context } from "ailiyah-ui";
 
 
 const router = createBrowserRouter([
@@ -52,8 +52,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-      <ThemeProvider>
+      <Context.ThemeProvider>
         <RouterProvider router={router} />
-      </ThemeProvider>
+      </Context.ThemeProvider>
   </React.StrictMode>
 );
