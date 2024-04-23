@@ -13,7 +13,7 @@ import { ProjectDTO } from "../services/project";
 import logo from "../resources/logo.png";
 
 const NavBar = Themed.NavBar;
-const Text = Primitive.TextInput;
+const Text = Primitive.TextBox;
 const Button = Themed.Button;
 const Form = Primitive.Form;
 const styled = Context.styled;
@@ -53,6 +53,10 @@ const NewProjectButton: React.FC<{}> = () => {
 
 const Root: React.FC<{}> = () => {
   const projects = useLoaderData() as unknown as Array<ProjectDTO>;
+  const theme = Context.useThemeContext("Theme");
+
+  console.log(theme)
+
   return (
     <NavBar.Root>
       <NavBar.Trigger />

@@ -53,7 +53,7 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-      <Context.ThemeProvider value={myTheme}>
+      <Context.ThemeProvider {...myTheme}>
         <RouterProvider router={router} />
       </Context.ThemeProvider>
   </React.StrictMode>
