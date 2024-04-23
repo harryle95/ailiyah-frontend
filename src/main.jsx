@@ -12,6 +12,7 @@ import ContentPanel from "./components/ContentPanel";
 import ResultPanel from "./components/ResultPanel";
 import { actionMakeRequest, actionHandleRequest, loaderRequestID, actionLogRequest } from "./services/request_helpers";
 import { Context } from "ailiyah-ui";
+import { myTheme } from "./theme";
 
 
 const router = createBrowserRouter([
@@ -52,7 +53,7 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-      <Context.ThemeProvider>
+      <Context.ThemeProvider value={myTheme}>
         <RouterProvider router={router} />
       </Context.ThemeProvider>
   </React.StrictMode>

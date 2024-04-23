@@ -13,7 +13,7 @@ import { ProjectDTO } from "../services/project";
 import logo from "../resources/logo.png";
 
 const NavBar = Themed.NavBar;
-const Text = Primitive.TextBox;
+const Text = Primitive.TextInput;
 const Button = Themed.Button;
 const Form = Primitive.Form;
 const styled = Context.styled;
@@ -63,7 +63,7 @@ const Root: React.FC<{}> = () => {
         <NavBar.Body twOther="scrollbar-thin">
           {projects ? (
             projects.map(({ id, name }) => (
-              <TextBoxItem key={id} id={id} name={name} />
+              <TextInputItem key={id} id={id} name={name} />
             ))
           ) : (
             <></>
@@ -78,7 +78,7 @@ const Root: React.FC<{}> = () => {
   );
 };
 
-interface TextBoxUpdateFormProps
+interface TextInputUpdateFormProps
   extends React.ComponentPropsWithoutRef<"form"> {
   id: string;
   projectName: string;
@@ -86,7 +86,7 @@ interface TextBoxUpdateFormProps
   setEditingState: Function;
 }
 
-const TextBoxUpdateForm: React.FC<TextBoxUpdateFormProps> = (props) => {
+const TextInputUpdateForm: React.FC<TextInputUpdateFormProps> = (props) => {
   const { projectName, setProjectName, id, setEditingState } = props;
   const [name, setName] = React.useState(projectName);
   const submit = useSubmit();
@@ -123,7 +123,7 @@ const TextBoxUpdateForm: React.FC<TextBoxUpdateFormProps> = (props) => {
   );
 };
 
-const TextBoxItem: React.FC<ProjectDTO> = (props) => {
+const TextInputItem: React.FC<ProjectDTO> = (props) => {
   const submit = useSubmit();
   const { id, name, ...rest } = props;
   const projectURL = `/project/${id}`;
@@ -137,7 +137,7 @@ const TextBoxItem: React.FC<ProjectDTO> = (props) => {
 
   return (
     <Text.Root
-      themeName="NavBarTextBoxRoot"
+      themeName="NavBarTextInputRoot"
       activeState={activeState || editingState}
       hoverSetActive={true}
       {...rest}
@@ -151,12 +151,12 @@ const TextBoxItem: React.FC<ProjectDTO> = (props) => {
 
             <Text.Component
               compLocation="right"
-              themeName="NavBarTextBoxMask"
+              themeName="NavBarTextInputMask"
             ></Text.Component>
 
             <Text.Component
               compLocation="right"
-              themeName="NavBarInvisibleTextBoxButtons"
+              themeName="NavBarInvisibleTextInputButtons"
             >
               <Button.InvisibleButtonGroup themeName="InvisibleButtonsLayout">
                 <Button.EditButton
@@ -181,7 +181,7 @@ const TextBoxItem: React.FC<ProjectDTO> = (props) => {
             </Text.Component>
           </>
         ) : (
-          <TextBoxUpdateForm
+          <TextInputUpdateForm
             id={id}
             projectName={projectName}
             setProjectName={setName}

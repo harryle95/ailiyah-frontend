@@ -67,14 +67,14 @@ const defaultTheme: Context.PresetTheme = {
 
 export const myTheme: Context.PresetTheme = {
   ...defaultTheme,
-  NavBarTextBoxRoot: {
+  NavBarTextInputRoot: {
     // Different bg color for active/inactive and light/dark modes
     twBackgroundColor:
       "data-[state=active]:bg-neutral-300 dark:data-[state=active]:bg-neutral-700",
     twBorderRadius: "rounded-md",
     twPadding: "px-2",
   },
-  NavBarTextBoxMask: {
+  NavBarTextInputMask: {
     twPosition: "absolute",
     twHeight: "max-h-full",
     twTopRightBottomLeft: "top-0 bottom-0 right-0", // Placed at the end of the text box on the right
@@ -84,7 +84,7 @@ export const myTheme: Context.PresetTheme = {
       "from-neutral-100 data-[state=active]:from-neutral-300 from-60% dark:from-neutral-900 dark:data-[state=active]:from-neutral-700",
     twBackgroundColor: "bg-gradient-to-l",
   },
-  NavBarInvisibleTextBoxButtons: {
+  NavBarInvisibleTextInputButtons: {
     twDisplay: "hidden data-[state=active]:flex", // Hidden by default, shown when active
     twPosition: "absolute",
     twTopRightBottomLeft: "top-0 bottom-0 right-0", // Placed at the end of text box on the right
