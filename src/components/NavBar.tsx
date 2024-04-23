@@ -53,9 +53,6 @@ const NewProjectButton: React.FC<{}> = () => {
 
 const Root: React.FC<{}> = () => {
   const projects = useLoaderData() as unknown as Array<ProjectDTO>;
-  const theme = Context.useThemeContext("Theme");
-
-  console.log(theme)
 
   return (
     <NavBar.Root>
