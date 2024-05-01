@@ -1,6 +1,7 @@
+import React from "react";
 import { Form } from "react-router-dom";
-import PromptForm from "./PromptForm";
 import { IMAGE_URL } from "../services/image";
+import {PromptForm, PromptTextArea} from "./prompt"
 
 export function PromptPanel({ data }) {
   const history = data.requests;
@@ -44,7 +45,7 @@ export function PromptPanel({ data }) {
 
       {/* Prompt Form */}
       <div>
-        <PromptForm initPrompt={""} projectId={data.id} key={data.id} />
+        <PromptTextArea initPrompt="" onClick={e=>e.preventDefault()} />
       </div>
     </div>
   );
