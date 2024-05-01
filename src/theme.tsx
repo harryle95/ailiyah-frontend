@@ -1,6 +1,6 @@
-import { Context } from "ailiyah-ui";
+import { PresetTheme } from "@ailiyah-ui/utils";
 
-const defaultTheme: Context.PresetTheme = {
+export const theme: PresetTheme = {
   NavBarRoot: {
     twHeight: "h-screen",
     twWidth: "w-fit",
@@ -63,10 +63,6 @@ const defaultTheme: Context.PresetTheme = {
   TooltipPopoverArrow: {
     twFill: "fill-gray-900 dark:fill-gray-50",
   },
-};
-
-export const myTheme: Context.PresetTheme = {
-  ...defaultTheme,
   NavBarTextInputRoot: {
     // Different bg color for active/inactive and light/dark modes
     twBackgroundColor:
