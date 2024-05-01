@@ -1,6 +1,6 @@
-import { Context } from "ailiyah-ui";
+import { PresetTheme } from "@ailiyah-ui/utils";
 
-const defaultTheme: Context.PresetTheme = {
+export const theme: PresetTheme = {
   NavBarRoot: {
     twHeight: "h-screen",
     twWidth: "w-fit",
@@ -63,33 +63,27 @@ const defaultTheme: Context.PresetTheme = {
   TooltipPopoverArrow: {
     twFill: "fill-gray-900 dark:fill-gray-50",
   },
-};
-
-export const myTheme: Context.PresetTheme = {
-  ...defaultTheme,
-  NavBarTextInputRoot: {
+  TextBoxRoot: {
     // Different bg color for active/inactive and light/dark modes
     twBackgroundColor:
       "data-[state=active]:bg-neutral-300 dark:data-[state=active]:bg-neutral-700",
     twBorderRadius: "rounded-md",
-    twPadding: "px-2",
+    twPadding: "p-2",
   },
-  NavBarTextInputMask: {
-    twPosition: "absolute",
-    twHeight: "max-h-full",
-    twTopRightBottomLeft: "top-0 bottom-0 right-0", // Placed at the end of the text box on the right
+  TextBoxMask: {
+    // twPosition: "absolute",
+    twHeight: "h-full",
+    // twTopRightBottomLeft: "top-0 bottom-0 right-0", // Placed at the end of the text box on the right
     twWidth: "w-8 data-[state=active]:w-20", // Larger width when active to hold text box buttons
     // Gradient starting color must match bg. Different active/non-active and light modes
     twGradientColorStops:
       "from-neutral-100 data-[state=active]:from-neutral-300 from-60% dark:from-neutral-900 dark:data-[state=active]:from-neutral-700",
     twBackgroundColor: "bg-gradient-to-l",
   },
-  NavBarInvisibleTextInputButtons: {
+  TextBoxButtons: {
     twDisplay: "hidden data-[state=active]:flex", // Hidden by default, shown when active
-    twPosition: "absolute",
-    twTopRightBottomLeft: "top-0 bottom-0 right-0", // Placed at the end of text box on the right
   },
-  NavBarFormInput: {
+  TextBoxInput: {
     twWidth: "w-full",
     twHeight: "h-full",
     twBackgroundColor: "bg-transparent",
@@ -110,9 +104,123 @@ export const myTheme: Context.PresetTheme = {
     twBackgroundColor:
       "bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600",
   },
-  InvisibleButtonsLayout: {
+  PromptRoot: {
+    twHeight: "h-full",
+    twWidth: "w-full",
     twFlex: "flex",
-    twPadding: "py-1",
-    twGap: "gap-x-1",
+    twFlexDirection: "flex-col",
+    twJustifyContent: "justify-between",
+    twPadding: "p-4",
+    twGap: "gap-y-5",
+    twFlexGrow: "flex-grow",
+  },
+  PromptContent: {
+    twFlex: "flex",
+    twFlexDirection: "flex-col",
+    twGap: "gap-y-4",
+    twFlexGrow: "flex-grow",
+    twOverflow: "overflow-y-auto",
+    twOther: "scrollbar-thin",
+    twPadding: "pr-3",
+  },
+  PromptButtonGroup: {
+    twFlexShrink: "flex-shrink-0",
+    twGap: "gap-x-3",
+    twFlex: "flex",
+    twAlignItems: "items-center",
+    twJustifyContent: "justify-end",
+    twPadding: "pr-3",
+    twTextColor:
+      "text-neutral-700 hover:text-neutral-500 dark:text-neutral-400 dark:hover:text-neutral-300",
+  },
+  PromptButtonGroupNewButton: {
+    twBackgroundColor:
+      "bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600",
+    twPadding: "py-2 px-3",
+    twBorderWidth: "border-2",
+    twBorderRadius: "rounded-lg",
+    twWidth: "w-[120px]",
+  },
+  PromptButtonGroupSubmitButton: {
+    twBackgroundColor:
+      "bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600",
+    twPadding: "py-2 px-3",
+    twBorderWidth: "border-2",
+    twBorderRadius: "rounded-lg",
+    twWidth: "w-[120px]",
+  },
+  PromptElementRoot: {
+    twWidth: "w-full",
+    twHeight: "h-fit",
+    twPadding: "pb-6",
+  },
+  PromptElementContent: {
+    twFlex: "flex",
+    twGap: "gap-x-4",
+    twWidth: "w-full",
+  },
+  PromptElementTextArea: {
+    twFlexGrow: "flex-grow",
+    twBorderWidth: "border-2",
+    twBorderRadius: "rounded-md",
+    twPadding: "p-4",
+  },
+  PromptElementThumbnail: {
+    twFlexShrink: "flex-shrink-0",
+  },
+  PromptElementButtonGroup: {
+    twDisplay: "hidden data-[state=active]:flex",
+  },
+  ThumbnailContent: {
+    twPadding: "pb-6",
+    twWidth: "w-[200px]",
+    twHeight: "h-[200px]",
+    twFlex: "flex",
+    twAlignItems: "items-center",
+    twJustifyContent: "justify-center",
+    twBorderWidth: "data-[state=active]:border-2",
+  },
+  ThumbnailCanvas: {
+    twMaxWidth: "max-w-full",
+    twMaxHeight: "max-h-full",
+    twObjectFit: "object-contain",
+    twFontWeight: "font-bold",
+    twFontSize: "text-2xl",
+  },
+  ThumbnailButtonGroup: {
+    twDisplay: "hidden data-[state=active]:flex",
+    twGap: "gap-x-4",
+  },
+  DialogContainer: {
+    twPadding: "p-4",
+    twWidth: "w-full",
+    twHeight: "h-full",
+    twFlex: "flex",
+    twFlexDirection: "flex-col",
+    twGap: "gap-y-4",
+  },
+  DialogContent: {
+    twWidth: "w-fit min-w-[550px]",
+    twHeight: "h-4/5",
+    twPadding: "p-2",
+    twBorderRadius: "rounded-md",
+    twBackgroundColor: "bg-neutral-50",
+  },
+  PromptForm: {
+    twFlexGrow: "flex-grow",
+    twOverflow: "overflow-y-auto",
+  },
+  DialogTitle: {
+    twFontSize: "text-2xl",
+    twFontWeight: "font-bold",
+  },
+  TextAreaTextArea: {
+    twWidth: "w-full",
+    twHeight: "h-full",
+    twBorderWidth: "border-2",
+    twBorderRadius: "rounded-md",
+    twPadding: "py-4 pl-4 pr-9",
+    twResize: "resize-none",
+    twOther: "scrollbar-thin",
   },
 };
