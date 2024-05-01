@@ -68,22 +68,20 @@ export const theme: PresetTheme = {
     twBackgroundColor:
       "data-[state=active]:bg-neutral-300 dark:data-[state=active]:bg-neutral-700",
     twBorderRadius: "rounded-md",
-    twPadding: "px-2",
+    twPadding: "p-2",
   },
   NavBarTextInputMask: {
-    twPosition: "absolute",
-    twHeight: "max-h-full",
-    twTopRightBottomLeft: "top-0 bottom-0 right-0", // Placed at the end of the text box on the right
+    // twPosition: "absolute",
+    twHeight: "h-full",
+    // twTopRightBottomLeft: "top-0 bottom-0 right-0", // Placed at the end of the text box on the right
     twWidth: "w-8 data-[state=active]:w-20", // Larger width when active to hold text box buttons
     // Gradient starting color must match bg. Different active/non-active and light modes
     twGradientColorStops:
       "from-neutral-100 data-[state=active]:from-neutral-300 from-60% dark:from-neutral-900 dark:data-[state=active]:from-neutral-700",
     twBackgroundColor: "bg-gradient-to-l",
   },
-  NavBarInvisibleTextInputButtons: {
+  NavBarTextInputButtons: {
     twDisplay: "hidden data-[state=active]:flex", // Hidden by default, shown when active
-    twPosition: "absolute",
-    twTopRightBottomLeft: "top-0 bottom-0 right-0", // Placed at the end of text box on the right
   },
   NavBarFormInput: {
     twWidth: "w-full",
@@ -105,10 +103,5 @@ export const theme: PresetTheme = {
     twBorderStyle: "border-solid",
     twBackgroundColor:
       "bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600",
-  },
-  InvisibleButtonsLayout: {
-    twFlex: "flex",
-    twPadding: "py-1",
-    twGap: "gap-x-1",
-  },
+  }
 };

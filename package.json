@@ -10,7 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "ailiyah-ui": "^0.0.9",
+    "@ailiyah-ui/box": "^0.0.3",
+    "@ailiyah-ui/context": "^0.0.3",
+    "@ailiyah-ui/factory": "^0.0.2",
+    "@ailiyah-ui/input": "^0.0.2",
+    "@ailiyah-ui/navbar": "^0.0.2",
+    "@ailiyah-ui/text": "^0.0.5",
+    "@ailiyah-ui/utils": "^0.0.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.3",

@@ -1,91 +1,11 @@
-import * as React from "react";
-import { Primitive, Themed, Context } from "ailiyah-ui";
-
-import {
-  useLocation,
-  Link,
-  useSubmit,
-  useLoaderData,
-  Form as RouterForm,
-} from "react-router-dom";
-import { ProjectDTO } from "../services/project";
-// @ts-ignore
-import logo from "../resources/logo.png";
-
-const NavBar = Themed.NavBar;
-const Text = Primitive.TextBox;
-const Button = Themed.Button;
-const Form = Primitive.Form;
-const styled = Context.styled;
-
-const IconPanel: React.FC<{}> = () => {
-  return (
-    <div className="flex items-center gap-4">
-      <img className="w-14 h-14" src={logo} alt="logo" />
-      <div className="font-sans font-bold text-xl">AILYAH</div>
-    </div>
-  );
-};
-
-const ProfileButton: React.FC<{}> = () => {
-  return (
-    <styled.div themeName="NavBarButtons">
-      <a href="#" className="flex flex-row gap-2">
-        <div>My Profile</div>
-      </a>
-    </styled.div>
-  );
-};
-
-const NewProjectButton: React.FC<{}> = () => {
-  return (
-    <styled.div themeName="NavBarButtons">
-      <Form.Root method="POST">
-        <button type="submit">
-          <div className="flex flex-row gap-2">
-            <div>New Project</div>
-          </div>
-        </button>
-      </Form.Root>
-    </styled.div>
-  );
-};
-
-const Root: React.FC<{}> = () => {
-  const projects = useLoaderData() as unknown as Array<ProjectDTO>;
-
-  return (
-    <NavBar.Root>
-      <NavBar.Trigger />
-      <NavBar.Content>
-        <NavBar.Header>
-          <IconPanel />
-        </NavBar.Header>
-        <NavBar.Body twOther="scrollbar-thin">
-          {projects ? (
-            projects.map(({ id, name }) => (
-              <TextInputItem key={id} id={id} name={name} />
-            ))
-          ) : (
-            <></>
-          )}
-        </NavBar.Body>
-        <NavBar.Footer twPadding="py-3" twFlex="flex flex-col" twGap="gap-y-3">
-          <NewProjectButton />
-          <ProfileButton />
-        </NavBar.Footer>
-      </NavBar.Content>
-    </NavBar.Root>
-  );
-};
-
-interface TextInputUpdateFormProps
-  extends React.ComponentPropsWithoutRef<"form"> {
-  id: string;
-  projectName: string;
-  setProjectName: Function;
-  setEditingState: Function;
-}
+import React from "react";
+import { useSubmit, useLocation, Link, Form } from "react-router-dom";
+import { ProjectDTO } from "../../services/project";
+import { styled } from "@ailiyah-ui/factory";
+import { TextBox } from "@ailiyah-ui/text";
+import { TextInputUpdateFormProps } from "./body.type";
+import { Input } from "@ailiyah-ui/input";
+import * as Button from "@ailiyah-ui/button";
 
 const TextInputUpdateForm: React.FC<TextInputUpdateFormProps> = (props) => {
   const { projectName, setProjectName, id, setEditingState } = props;
@@ -102,9 +22,9 @@ const TextInputUpdateForm: React.FC<TextInputUpdateFormProps> = (props) => {
   };
 
   return (
-    <Form.Root onSubmit={onSubmit}>
+    <Form onSubmit={onSubmit}>
       <input name="id" value={id} className="hidden" readOnly />
-      <Form.Input
+      <Input
         themeName="NavBarFormInput"
         name="name"
         type="text"
@@ -120,7 +40,7 @@ const TextInputUpdateForm: React.FC<TextInputUpdateFormProps> = (props) => {
         }}
         onBlur={onSubmit}
       />
-    </Form.Root>
+    </Form>
   );
 };
 
@@ -137,29 +57,33 @@ const TextInputItem: React.FC<ProjectDTO> = (props) => {
   let activeState = location.pathname === projectURL;
 
   return (
-    <Text.Root
+    <TextBox.Root
       themeName="NavBarTextInputRoot"
-      activeState={activeState || editingState}
+      initialState={activeState || editingState}
       hoverSetActive={true}
       {...rest}
     >
-      <styled.div twPosition="relative" twWidth="w-full" twHeight="h-full">
+      <styled.div
+        twPosition="relative"
+        twWidth="w-full"
+        twBorderRadius="rounded-md"
+      >
         {!editingState ? (
           <>
-            <Text.Content>
+            <TextBox.Content>
               <Link to={projectURL}>{projectName}</Link>
-            </Text.Content>
+            </TextBox.Content>
 
-            <Text.Component
+            <TextBox.Component
               compLocation="right"
               themeName="NavBarTextInputMask"
-            ></Text.Component>
+            ></TextBox.Component>
 
-            <Text.Component
+            <TextBox.Component
               compLocation="right"
-              themeName="NavBarInvisibleTextInputButtons"
+              themeName="NavBarTextInputButtons"
             >
-              <Button.InvisibleButtonGroup themeName="InvisibleButtonsLayout">
+              <styled.div twFlex="flex" twPadding="py-1" twGap="gap-x-1">
                 <Button.EditButton
                   tooltipContent="Edit"
                   onClick={() => setEditingState(!editingState)}
@@ -178,8 +102,8 @@ const TextInputItem: React.FC<ProjectDTO> = (props) => {
                     submit(formData, { method: "DELETE" });
                   }}
                 />
-              </Button.InvisibleButtonGroup>
-            </Text.Component>
+              </styled.div>
+            </TextBox.Component>
           </>
         ) : (
           <TextInputUpdateForm
@@ -190,8 +114,8 @@ const TextInputItem: React.FC<ProjectDTO> = (props) => {
           />
         )}
       </styled.div>
-    </Text.Root>
+    </TextBox.Root>
   );
 };
 
-export { Root };
+export { TextInputItem };
