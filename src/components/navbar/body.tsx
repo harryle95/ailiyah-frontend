@@ -25,7 +25,7 @@ const TextInputUpdateForm: React.FC<TextInputUpdateFormProps> = (props) => {
     <Form onSubmit={onSubmit}>
       <input name="id" value={id} className="hidden" readOnly />
       <Input
-        themeName="NavBarFormInput"
+        themeName="TextBoxInput"
         name="name"
         type="text"
         key={id}
@@ -58,7 +58,7 @@ const TextInputItem: React.FC<ProjectDTO> = (props) => {
 
   return (
     <TextBox.Root
-      themeName="NavBarTextInputRoot"
+      themeName="TextBoxRoot"
       initialState={activeState || editingState}
       hoverSetActive={true}
       {...rest}
@@ -76,12 +76,12 @@ const TextInputItem: React.FC<ProjectDTO> = (props) => {
 
             <TextBox.Component
               compLocation="right"
-              themeName="NavBarTextInputMask"
+              themeName="TextBoxMask"
             ></TextBox.Component>
 
             <TextBox.Component
               compLocation="right"
-              themeName="NavBarTextInputButtons"
+              themeName="TextBoxButtons"
             >
               <styled.div twFlex="flex" twPadding="py-1" twGap="gap-x-1">
                 <Button.EditButton

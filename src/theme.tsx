@@ -63,14 +63,14 @@ export const theme: PresetTheme = {
   TooltipPopoverArrow: {
     twFill: "fill-gray-900 dark:fill-gray-50",
   },
-  NavBarTextInputRoot: {
+  TextBoxRoot: {
     // Different bg color for active/inactive and light/dark modes
     twBackgroundColor:
       "data-[state=active]:bg-neutral-300 dark:data-[state=active]:bg-neutral-700",
     twBorderRadius: "rounded-md",
     twPadding: "p-2",
   },
-  NavBarTextInputMask: {
+  TextBoxMask: {
     // twPosition: "absolute",
     twHeight: "h-full",
     // twTopRightBottomLeft: "top-0 bottom-0 right-0", // Placed at the end of the text box on the right
@@ -80,10 +80,10 @@ export const theme: PresetTheme = {
       "from-neutral-100 data-[state=active]:from-neutral-300 from-60% dark:from-neutral-900 dark:data-[state=active]:from-neutral-700",
     twBackgroundColor: "bg-gradient-to-l",
   },
-  NavBarTextInputButtons: {
+  TextBoxButtons: {
     twDisplay: "hidden data-[state=active]:flex", // Hidden by default, shown when active
   },
-  NavBarFormInput: {
+  TextBoxInput: {
     twWidth: "w-full",
     twHeight: "h-full",
     twBackgroundColor: "bg-transparent",
@@ -103,5 +103,5 @@ export const theme: PresetTheme = {
     twBorderStyle: "border-solid",
     twBackgroundColor:
       "bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600",
-  }
+  },
 };
