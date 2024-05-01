@@ -7,14 +7,18 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest run",
+    "storybook": "storybook dev -p 6006"
   },
   "dependencies": {
     "@ailiyah-ui/box": "^0.0.3",
     "@ailiyah-ui/context": "^0.0.3",
+    "@ailiyah-ui/dialog": "^0.0.2",
     "@ailiyah-ui/factory": "^0.0.2",
     "@ailiyah-ui/input": "^0.0.2",
     "@ailiyah-ui/navbar": "^0.0.2",
+    "@ailiyah-ui/prompt": "^0.0.1",
     "@ailiyah-ui/text": "^0.0.5",
     "@ailiyah-ui/utils": "^0.0.7",
     "react": "^18.2.0",
@@ -23,6 +27,19 @@
     "tailwind-scrollbar": "^3.1.0"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^1.3.3",
+    "@storybook/addon-essentials": "^8.0.9",
+    "@storybook/addon-interactions": "^8.0.9",
+    "@storybook/addon-links": "^8.0.9",
+    "@storybook/addon-onboarding": "^8.0.9",
+    "@storybook/blocks": "^8.0.9",
+    "@storybook/react": "^8.0.9",
+    "@storybook/react-vite": "^8.0.9",
+    "@storybook/test": "^8.0.9",
+    "@storybook/test-runner": "^0.17.0",
+    "@testing-library/jest-dom": "^6.4.2",
+    "@testing-library/react": "^15.0.4",
+    "@testing-library/user-event": "^14.5.2",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react": "^4.2.1",
@@ -31,8 +48,13 @@
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
+    "eslint-plugin-storybook": "^0.8.0",
+    "jsdom": "^24.0.0",
     "postcss": "^8.4.38",
+    "prop-types": "^15.8.1",
+    "storybook": "^8.0.9",
     "tailwindcss": "^3.4.3",
-    "vite": "^5.2.0"
+    "vite": "^5.2.0",
+    "vitest": "^1.5.0"
   }
 }
