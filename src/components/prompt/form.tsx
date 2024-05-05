@@ -2,6 +2,9 @@ import React from "react";
 import { FormDataType, StateType } from "@ailiyah-ui/prompt";
 import { styled } from "@ailiyah-ui/factory";
 import { Prompt } from "@ailiyah-ui/prompt";
+import { Form as _Form, useSubmit } from "react-router-dom";
+
+const Form = styled(_Form)
 
 const PromptForm: React.FC<{
   initialFormData?: FormDataType;
@@ -15,6 +18,7 @@ const PromptForm: React.FC<{
     alert("Submitting Form");
   },
 }) => {
+  const submit = useSubmit();
   const initState = initialFormData
     ? React.useCallback(() => {
         return Object.keys(initialFormData).reduce(
@@ -37,7 +41,7 @@ const PromptForm: React.FC<{
     return initialFormData ? initialFormData : {};
   });
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = (e: React.FormEvent) => {
     e.preventDefault();
     const text = new Array();
     const images = new Array();
@@ -61,15 +65,11 @@ const PromptForm: React.FC<{
     submitFormData.append("id", JSON.stringify(id))
     submitFormData.append("text", JSON.stringify(text))
     images.forEach(item => submitFormData.append("images", item))
-    console.log(submitFormData)
-    for (const pair of submitFormData.entries()) {
-      console.log(pair[0]+ ', ' + pair[1]); 
-  }
-    alert("Submit Form");
+    submit(submitFormData, {method: "POST", encType: "multipart/form-data"} )
   };
 
   return (
-    <styled.form onSubmit={onSubmitHandler} themeName="PromptForm">
+    <Form onSubmit={onSubmitHandler} themeName="PromptForm">
       <Prompt.Root
         editingStates={editingStates}
         setEditingStates={setEditingStates}
@@ -78,7 +78,7 @@ const PromptForm: React.FC<{
       >
         <Prompt.ButtonGroup />
       </Prompt.Root>
-    </styled.form>
+    </Form>
   );
 };
 
