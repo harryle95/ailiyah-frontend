@@ -37,8 +37,39 @@ const PromptForm: React.FC<{
     return initialFormData ? initialFormData : {};
   });
 
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    const text = new Array();
+    const images = new Array();
+    const id = new Array();
+
+    for (const pair of Object.entries(formData)){
+      let [key, {prompt, thumbnail}] = pair;
+      text.push(prompt);
+      if (thumbnail){
+        images.push(thumbnail)
+      }else{
+        images.push(new File([""], "empty.jpeg", {type: "image/jpeg"}))
+      }
+      if (!editing){
+        id.push(key)
+      }else{
+        id.push(null)
+      }
+    }
+    const submitFormData = new FormData();
+    submitFormData.append("id", JSON.stringify(id))
+    submitFormData.append("text", JSON.stringify(text))
+    images.forEach(item => submitFormData.append("images", item))
+    console.log(submitFormData)
+    for (const pair of submitFormData.entries()) {
+      console.log(pair[0]+ ', ' + pair[1]); 
+  }
+    alert("Submit Form");
+  };
+
   return (
-    <styled.form onSubmit={onSubmit} themeName="PromptForm">
+    <styled.form onSubmit={onSubmitHandler} themeName="PromptForm">
       <Prompt.Root
         editingStates={editingStates}
         setEditingStates={setEditingStates}
