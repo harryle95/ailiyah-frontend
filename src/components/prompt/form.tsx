@@ -10,7 +10,9 @@ const PromptForm: React.FC<{
   initialFormData?: FormDataType;
   editing: boolean;
   onSubmit?: React.FormEventHandler<HTMLFormElement>;
+  setOpen?:Function;
 }> = ({
+  setOpen,
   initialFormData = undefined,
   editing = true,
   onSubmit = (e) => {
@@ -42,7 +44,6 @@ const PromptForm: React.FC<{
   });
 
   const onSubmitHandler = (e: React.FormEvent) => {
-    e.preventDefault();
     const text = new Array();
     const images = new Array();
     const id = new Array();
@@ -65,7 +66,10 @@ const PromptForm: React.FC<{
     submitFormData.append("id", JSON.stringify(id))
     submitFormData.append("text", JSON.stringify(text))
     images.forEach(item => submitFormData.append("images", item))
-    submit(submitFormData, {method: "POST", encType: "multipart/form-data"} )
+    submit(submitFormData, {method: "POST", encType: "multipart/form-data", navigate: true} )
+    if (setOpen){
+      setOpen(false);
+    }
   };
 
   return (
