@@ -15,7 +15,7 @@ export async function actionLogRequest({request, params}:{request: Request, para
     console.log(Object.fromEntries(data))
     const result = await createRequest(data)
     console.log(result)
-    return null
+    return redirect(`/project/${params.projectId}`)
 }
 
 export async function actionHandleRequest({request, params}:{request: Request, params: Params}){
