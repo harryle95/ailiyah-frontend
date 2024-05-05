@@ -111,6 +111,9 @@ export const theme: PresetTheme = {
     twFontSize: "text-2xl",
     twFontWeight: "font-bold",
   },
+  TextAreaRoot: {
+    twTextColor: "text-neutral-200 dark:text-neutral-800"
+  },
   TextAreaTextArea: {
     twWidth: "w-full",
     twHeight: "h-full",
