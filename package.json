@@ -18,7 +18,7 @@
     "@ailiyah-ui/factory": "^0.0.2",
     "@ailiyah-ui/input": "^0.0.2",
     "@ailiyah-ui/navbar": "^0.0.2",
-    "@ailiyah-ui/prompt": "^0.0.2",
+    "@ailiyah-ui/prompt": "^0.0.4",
     "@ailiyah-ui/text": "^0.0.5",
     "@ailiyah-ui/utils": "^0.0.7",
     "react": "^18.2.0",
