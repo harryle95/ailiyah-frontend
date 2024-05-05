@@ -1,8 +1,6 @@
-import { defaultTheme } from "@ailiyah-ui/utils";
 import { PresetTheme } from "@ailiyah-ui/utils";
 
 export const theme: PresetTheme = {
-  ...defaultTheme,
   PromptRoot: {
     twHeight: "h-full",
     twWidth: "w-full",
