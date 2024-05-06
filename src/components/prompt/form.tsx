@@ -66,14 +66,14 @@ const PromptForm: React.FC<{
     submitFormData.append("id", JSON.stringify(id))
     submitFormData.append("text", JSON.stringify(text))
     images.forEach(item => submitFormData.append("images", item))
-    submit(submitFormData, {method: "POST", encType: "multipart/form-data", navigate: true} )
+    submit(submitFormData, {method: "POST", encType: "multipart/form-data", navigate: false} )
     if (setOpen){
       setOpen(false);
     }
   };
 
   return (
-    <Form onSubmit={onSubmitHandler} themeName="PromptForm">
+    <Form navigate={true} reloadDocument={true} onSubmit={onSubmitHandler} themeName="PromptForm">
       <Prompt.Root
         editingStates={editingStates}
         setEditingStates={setEditingStates}
