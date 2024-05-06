@@ -12,7 +12,12 @@ const TextInputUpdateForm: React.FC<TextInputUpdateFormProps> = (props) => {
   const [name, setName] = React.useState(projectName);
   const submit = useSubmit();
 
-  const onSubmit = (e) => {
+  const onSubmit = (
+    e:
+      | React.KeyboardEvent<HTMLInputElement>
+      | React.FocusEvent<HTMLInputElement>
+      | React.FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
     setEditingState(false);
     if (name !== projectName) {
@@ -54,7 +59,7 @@ const TextInputItem: React.FC<ProjectDTO> = (props) => {
 
   // Chek if current link is active and set button to appear/disappear
   let location = useLocation();
-  let activeState = location.pathname === projectURL;
+  let activeState = location.pathname.startsWith(projectURL);
 
   return (
     <TextBox.Root
@@ -79,10 +84,7 @@ const TextInputItem: React.FC<ProjectDTO> = (props) => {
               themeName="TextBoxMask"
             ></TextBox.Component>
 
-            <TextBox.Component
-              compLocation="right"
-              themeName="TextBoxButtons"
-            >
+            <TextBox.Component compLocation="right" themeName="TextBoxButtons">
               <styled.div twFlex="flex" twPadding="py-1" twGap="gap-x-1">
                 <Button.EditButton
                   tooltipContent="Edit"
