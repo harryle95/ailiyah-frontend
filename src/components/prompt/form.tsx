@@ -33,8 +33,6 @@ const PromptForm: React.FC<{
   requestId = undefined,
 }) => {
   const submit = useSubmit();
-  console.log("Re-render prompt form");
-  console.log("Initial form", initialFormData);
   const [formData, setFormData] = React.useState<FormDataType>(
     initialFormData ? initialFormData : {}
   );
