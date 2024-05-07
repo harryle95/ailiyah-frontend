@@ -9,16 +9,17 @@ const PromptTextArea: React.FC<{}> = () => {
   const submit = useSubmit();
   const [prompt, setPrompt] = React.useState<string>("");
   return (
-    <Form
-      method="POST"
-      encType="multipart/form-data"
-      onSubmit={(e) => {
-        e.preventDefault();
-        submitPrompt(submit, prompt);
-      }}
-    >
-      <TextArea.Root themeName="TextAreaRoot">
-        <TextArea.Content themeName="TextAreaContent">
+    <TextArea.Root themeName="TextAreaRoot">
+      <TextArea.Content themeName="TextAreaContent">
+        <Form
+          id="promptForm"
+          method="POST"
+          encType="multipart/form-data"
+          onSubmit={(e) => {
+            e.preventDefault();
+            submitPrompt(submit, prompt);
+          }}
+        >
           <TextArea.TextArea
             name="text"
             placeholder={prompt}
@@ -27,16 +28,17 @@ const PromptTextArea: React.FC<{}> = () => {
             themeName="TextAreaTextArea"
             required={true}
           />
-          <TextArea.Component twTopRightBottomLeft="bottom-1 right-4">
-            <PromptDialog />
-            <Button.SubmitButton
-              type="submit"
-              themeName="TextAreaSubmitButton"
-            />
-          </TextArea.Component>
-        </TextArea.Content>
-      </TextArea.Root>
-    </Form>
+        </Form>
+        <TextArea.Component twTopRightBottomLeft="bottom-1 right-4">
+          <PromptDialog />
+          <Button.SubmitButton
+            form="promptForm"
+            type="submit"
+            themeName="TextAreaSubmitButton"
+          />
+        </TextArea.Component>
+      </TextArea.Content>
+    </TextArea.Root>
   );
 };
 
