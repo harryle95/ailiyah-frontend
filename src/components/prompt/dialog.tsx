@@ -7,11 +7,11 @@ const Container = createBox("Container", { twPosition: "relative" });
 const Box = createLocationBox("Box");
 
 function PromptDialog() {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = React.useState(false);
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
-        <Button.AddButton />
+        <Button.AddButton tooltipContent="Expand" />
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay />
@@ -21,10 +21,10 @@ function PromptDialog() {
             <Dialog.Description themeName="DialogDescription">
               Make your request by submitting image(s) or write prompt(s)
             </Dialog.Description>
-            <PromptForm editing={true} setOpen={setOpen}/>
+            <PromptForm editing={true} setOpen={setOpen} />
             <Box compLocation="top-right" themeName="DialogCloseButton">
               <Dialog.Close asChild>
-                <Button.CrossButton />
+                <Button.CrossButton tooltipContent="Close" />
               </Dialog.Close>
             </Box>
           </Container>
