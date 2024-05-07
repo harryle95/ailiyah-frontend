@@ -1,5 +1,5 @@
 import React from "react";
-import { FormDataType, StateType } from "@ailiyah-ui/prompt";
+import { FormDataType } from "@ailiyah-ui/prompt";
 import { styled } from "@ailiyah-ui/factory";
 import { Prompt } from "@ailiyah-ui/prompt";
 import { Form as _Form, useSubmit } from "react-router-dom";
@@ -11,25 +11,8 @@ const PromptForm: React.FC<{
   initialFormData?: FormDataType;
   editing: boolean;
   setOpen?: Function;
-}> = ({ setOpen, initialFormData = undefined, editing = true }) => {
+}> = ({ setOpen = undefined, initialFormData = undefined, editing = true }) => {
   const submit = useSubmit();
-  const initState = initialFormData
-    ? React.useCallback(() => {
-        return Object.keys(initialFormData).reduce(
-          (acc: StateType, curr: string) => {
-            acc[curr] =
-              editing !== undefined && editing !== null ? editing : true;
-            return acc;
-          },
-          {}
-        );
-      }, [Object.keys(initialFormData)])
-    : () => {
-        return {};
-      };
-
-  const [editingStates, setEditingStates] =
-    React.useState<StateType>(initState);
 
   const [formData, setFormData] = React.useState<FormDataType>(() => {
     return initialFormData ? initialFormData : {};
@@ -46,12 +29,16 @@ const PromptForm: React.FC<{
   return (
     <Form onSubmit={onSubmitHandler} themeName="PromptForm">
       <Prompt.Root
-        editingStates={editingStates}
-        setEditingStates={setEditingStates}
+        editing={editing}
         formData={formData}
         setFormData={setFormData}
       >
-        <Prompt.ButtonGroup />
+        {editing && (
+          <Prompt.ButtonGroup>
+            <Prompt.AddButton>Add Element</Prompt.AddButton>
+            <Prompt.Button type="submit">Submit</Prompt.Button>
+          </Prompt.ButtonGroup>
+        )}
       </Prompt.Root>
     </Form>
   );
