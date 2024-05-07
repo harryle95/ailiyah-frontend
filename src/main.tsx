@@ -9,16 +9,10 @@ import {
   loaderProjectId,
 } from "./services/project_helpers";
 import { ErrorPage } from "./routes/error";
+import { ResultPanel, ContentPanel } from "./components/panel/panel";
 import {
-  ResultPanel,
-  PromptPanel,
-  ContentPanel,
-} from "./components/panel/panel";
-import {
-  actionMakeRequest,
   actionHandleRequest,
   loaderRequestID,
-  actionLogRequest,
 } from "./services/request_helpers";
 import { ThemeProvider } from "@ailiyah-ui/context";
 import { theme } from "./theme";
@@ -39,14 +33,9 @@ const router = createBrowserRouter([
             path: "/project/:projectId",
             element: <ContentPanel />,
             loader: loaderProjectId,
-            action: actionLogRequest,
+            action: actionHandleRequest,
 
             children: [
-              {
-                path: "/project/:projectId/create",
-                element: <ResultPanel />,
-                action: actionMakeRequest,
-              },
               {
                 path: "/project/:projectId/:requestId",
                 action: actionHandleRequest,
