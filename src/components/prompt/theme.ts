@@ -1,6 +1,6 @@
 import { PresetTheme } from "@ailiyah-ui/utils";
 
-export const theme: PresetTheme = {
+const promptTheme: PresetTheme = {
   PromptRoot: {
     twHeight: "h-full",
     twWidth: "w-full",
@@ -27,25 +27,20 @@ export const theme: PresetTheme = {
     twAlignItems: "items-center",
     twJustifyContent: "justify-end",
     twPadding: "pr-3",
+  },
+  PromptButtonGroupButton: {
+    twBackgroundColor:
+      "bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600",
+    twPadding: "py-2 px-3",
+    twBorderWidth: "border-2",
+    twBorderRadius: "rounded-lg",
+    twWidth: "w-[120px]",
     twTextColor:
       "text-neutral-700 hover:text-neutral-500 dark:text-neutral-400 dark:hover:text-neutral-300",
   },
-  PromptButtonGroupNewButton: {
-    twBackgroundColor:
-      "bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600",
-    twPadding: "py-2 px-3",
-    twBorderWidth: "border-2",
-    twBorderRadius: "rounded-lg",
-    twWidth: "w-[120px]",
-  },
-  PromptButtonGroupSubmitButton: {
-    twBackgroundColor:
-      "bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600",
-    twPadding: "py-2 px-3",
-    twBorderWidth: "border-2",
-    twBorderRadius: "rounded-lg",
-    twWidth: "w-[120px]",
-  },
+};
+
+const promptElementTheme: PresetTheme = {
   PromptElementRoot: {
     twWidth: "w-full",
     twHeight: "h-fit",
@@ -68,6 +63,9 @@ export const theme: PresetTheme = {
   PromptElementButtonGroup: {
     twDisplay: "hidden data-[state=active]:flex",
   },
+};
+
+const uploadThumbnailTheme: PresetTheme = {
   ThumbnailContent: {
     twPadding: "pb-6",
     twWidth: "w-[200px]",
@@ -88,6 +86,9 @@ export const theme: PresetTheme = {
     twDisplay: "hidden data-[state=active]:flex",
     twGap: "gap-x-4",
   },
+};
+
+const dialogTheme: PresetTheme = {
   DialogContainer: {
     twPadding: "p-4",
     twWidth: "w-full",
@@ -103,17 +104,13 @@ export const theme: PresetTheme = {
     twBorderRadius: "rounded-md",
     twBackgroundColor: "bg-neutral-50",
   },
-  PromptForm: {
-    twFlexGrow: "flex-grow",
-    twOverflow: "overflow-y-auto",
-  },
   DialogTitle: {
-    twFontSize: "text-2xl",
+    twFontSize: "text-3xl",
     twFontWeight: "font-bold",
   },
-  TextAreaRoot: {
-    twTextColor: "text-neutral-200 dark:text-neutral-800"
-  },
+};
+
+const textareaTheme: PresetTheme = {
   TextAreaTextArea: {
     twWidth: "w-full",
     twHeight: "h-full",
@@ -123,4 +120,23 @@ export const theme: PresetTheme = {
     twResize: "resize-none",
     twOther: "scrollbar-thin",
   },
+  TextAreaComponent: {
+    twTopRightBottomLeft: "bottom-1 right-4",
+  },
+};
+
+const promptFormTheme: PresetTheme = {
+  PromptForm: {
+    twFlexGrow: "flex-grow",
+    twOverflow: "overflow-y-auto",
+  },
+};
+
+export const theme: PresetTheme = {
+  ...promptTheme,
+  ...promptElementTheme,
+  ...uploadThumbnailTheme,
+  ...dialogTheme,
+  ...textareaTheme,
+  ...promptFormTheme,
 };

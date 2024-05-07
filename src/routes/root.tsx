@@ -1,13 +1,12 @@
 import * as NavBar from "../components/navbar/NavBar";
 import { Outlet } from "react-router-dom";
+import React from "react";
 
-export default function Root() {
+export function Root() {
   return (
     <div className="flex">
       <NavBar.Root />
-      <div className="flex-grow-1 w-full relative">
-        <Outlet />
-      </div>
+      <Outlet />
     </div>
   );
 }
