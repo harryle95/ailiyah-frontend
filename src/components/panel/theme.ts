@@ -1,5 +1,17 @@
 import { PresetTheme } from "@ailiyah-ui/utils";
 
+const historyTheme: PresetTheme = {
+  HistoryRoot: {
+    twBorderRadius: "rounded-md",
+    twBorderWidth: "border-2",
+    twPadding: "pb-2 pr-2",
+  },
+  HistoryComponent: {
+    twDisplay: "hidden data-[state=active]:flex",
+    twTopRightBottomLeft: "bottom-0 right-0",
+  },
+};
+
 const panelTheme: PresetTheme = {
   PanelRoot: {
     twWidth: "w-1/2",
@@ -61,6 +73,7 @@ const promptPanelTheme: PresetTheme = {
   },
   PromptPanelContent: {
     ...panelTheme.PanelContent,
+    twGap: "gap-y-4",
   },
   PromptPanelTextArea: {
     twFlexShrink: "flex-shrink-0",
@@ -87,6 +100,7 @@ const theme: PresetTheme = {
   ...promptPanelTheme,
   ...resultPanelTheme,
   ...contentPanelTheme,
+  ...historyTheme,
 };
 
 export { theme };
