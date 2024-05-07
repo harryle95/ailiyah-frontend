@@ -7,41 +7,56 @@ import { submitForm } from "./helpers";
 
 const Form = styled(_Form);
 
+const DisplayPromptForm: React.FC<{
+  initialFormData: FormDataType;
+}> = ({ initialFormData }) => {
+  return (
+    <styled.div themeName="PromptForm">
+      <Prompt.Root
+        formData={initialFormData}
+        setFormData={() => {}}
+        editing={false}
+      ></Prompt.Root>
+    </styled.div>
+  );
+};
+
 const PromptForm: React.FC<{
   initialFormData?: FormDataType;
-  editing: boolean;
   setOpen?: Function;
-}> = ({ setOpen = undefined, initialFormData = undefined, editing = true }) => {
+  method?: "POST" | "post" | "PUT" | "put";
+  requestId?: string;
+}> = ({
+  initialFormData = undefined,
+  setOpen = undefined,
+  method = "POST",
+  requestId = undefined,
+}) => {
   const submit = useSubmit();
-
-  const [formData, setFormData] = React.useState<FormDataType>(() => {
-    return initialFormData ? initialFormData : {};
-  });
+  console.log("Re-render prompt form");
+  console.log("Initial form", initialFormData);
+  const [formData, setFormData] = React.useState<FormDataType>(
+    initialFormData ? initialFormData : {}
+  );
 
   const onSubmitHandler = (e: React.FormEvent) => {
     e.preventDefault();
     if (setOpen) {
       setOpen(false);
     }
-    submitForm(submit, formData, initialFormData);
+    submitForm(submit, formData, initialFormData, method, requestId);
   };
 
   return (
     <Form onSubmit={onSubmitHandler} themeName="PromptForm">
-      <Prompt.Root
-        editing={editing}
-        formData={formData}
-        setFormData={setFormData}
-      >
-        {editing && (
-          <Prompt.ButtonGroup>
-            <Prompt.AddButton>Add Element</Prompt.AddButton>
-            <Prompt.Button type="submit">Submit</Prompt.Button>
-          </Prompt.ButtonGroup>
-        )}
+      <Prompt.Root formData={formData} setFormData={setFormData}>
+        <Prompt.ButtonGroup>
+          <Prompt.AddButton>Add Element</Prompt.AddButton>
+          <Prompt.Button type="submit">Submit</Prompt.Button>
+        </Prompt.ButtonGroup>
       </Prompt.Root>
     </Form>
   );
 };
 
-export { PromptForm };
+export { PromptForm, DisplayPromptForm };
