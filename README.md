@@ -1,8 +1,26 @@
-# React + Vite
+## AILIYAH - Image generation website 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend repository of AILIYAH, an image generation platform done as part of the MCI project. The frontend repository was built using `React`, `React-Router/Remix`, styled with `TailwindCSS` and `radix-ui` through our [component](https://github.com/haryle/ailiyah-ui) library `@ailiyah-ui`. 
 
-Currently, two official plugins are available:
+## Demo
+![](src/resources/demo.gif.gif)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## Install Instructions
+
+Pull this repository. 
+
+To install dependencies:
+```
+npm install 
+```
+
+## Setup Instruction
+
+Make sure to follow the setup instructions in the [backend](https://github.com/haryle/ailiyah-backend) repository first. Once completed, run
+
+```
+npm run dev
+```
+
+You should then be able to interact with the UI. 
