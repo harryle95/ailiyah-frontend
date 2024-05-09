@@ -5,9 +5,13 @@ const historyTheme: PresetTheme = {
     twBorderRadius: "rounded-md",
     twBorderWidth: "border-2",
     twPadding: "pb-2 pr-2",
+    twBorderColor: "hover:border-neutral-600",
   },
   HistoryComponent: {
     twDisplay: "hidden data-[state=active]:flex",
+    twJustifyContent: "justify-center",
+    twGap: "gap-x-1",
+    twAlignItems: "items-center",
     twTopRightBottomLeft: "bottom-0 right-0",
   },
 };
