@@ -21,7 +21,7 @@ function PromptDialog({
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
-        <Button.AddButton tooltipContent="Expand" />
+        <Button.AddButton themeName="TextAreaButton" tooltipContent="Expand" />
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay />

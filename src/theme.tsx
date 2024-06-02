@@ -9,4 +9,8 @@ export const theme: PresetTheme = {
   ...promptTheme,
   ...navbarTheme,
   ...panelTheme,
+  Icons: {
+    twWidth: "w-5",
+    twHeight: "h-5",
+  },
 };

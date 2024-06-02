@@ -22,7 +22,11 @@ const [Content, useContentContext] = createStateBox("Content", undefined, {
 const ShowResultButton: React.FC<{ projectId: string; requestId: string }> =
   React.memo(({ projectId, requestId }) => {
     return (
-      <form method="GET" action={`/project/${projectId}/${requestId}`}>
+      <form
+        className="flex justify-center items-center"
+        method="GET"
+        action={`/project/${projectId}/${requestId}`}
+      >
         <Button.RightButton tooltipContent="Show Result" />
       </form>
     );
@@ -32,7 +36,7 @@ const DeleteRequestButton: React.FC<{ requestId: string }> = React.memo(
   ({ requestId }) => {
     const submit = useSubmit();
     return (
-      <Form method="DELETE">
+      <Form method="DELETE" className="flex justify-center items-center">
         <Button.DeleteAlertButton
           dialogTitle="Delete Request"
           dialogDescription="This action is PERMANENT. Are you sure you want to continue?"
