@@ -23,7 +23,7 @@ const ShowResultButton: React.FC<{ projectId: string; requestId: string }> =
   React.memo(({ projectId, requestId }) => {
     return (
       <form method="GET" action={`/project/${projectId}/${requestId}`}>
-        <Button.RightButton tooltipContent="show result" />
+        <Button.RightButton tooltipContent="Show Result" />
       </form>
     );
   });
@@ -48,7 +48,7 @@ const DeleteRequestButton: React.FC<{ requestId: string }> = React.memo(
               }
             );
           }}
-          tooltipContent="delete"
+          tooltipContent="Delete"
         />
       </Form>
     );
