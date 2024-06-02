@@ -29,7 +29,7 @@ const Root: React.FC<{}> = () => {
         </NavBar.Body>
         <NavBar.Footer twPadding="py-3" twFlex="flex flex-col" twGap="gap-y-3">
           <NewProjectButton />
-          <ProfileButton />
+          {/* <ProfileButton /> */}
         </NavBar.Footer>
       </NavBar.Content>
     </NavBar.Root>
